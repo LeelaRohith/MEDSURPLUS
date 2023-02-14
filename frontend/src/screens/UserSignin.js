@@ -1,3 +1,4 @@
+import { Avatar } from 'flowbite-react'
 import React, { useState } from 'react'
 
 function UserSignin() {
@@ -10,9 +11,13 @@ function UserSignin() {
   }
   return (
     <div>
+      <Avatar
+        img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+        rounded={true}
+      />
       <div
         style={{
-          backgroundColor: 'blue',
+          backgroundColor: 'var(--themecolor)',
           display: 'flex',
           justifyContent: 'center',
         }}
