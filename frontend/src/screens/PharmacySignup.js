@@ -1,21 +1,31 @@
 import React, { useState } from 'react'
 
 function PharmacySignup(){
-
+   
     return (
         <div style={{
-            background: '#74ebd5',
-            background: '-webkit-linear-gradient(to right, #ACB6E5, #74ebd5)',
-            background: 'linear-gradient(to right, #ACB6E5, #74ebd5)',
-            height: '100vh',
+            backgroundColor: '#00b7e9',height:'350%',
+    backgroundImage: 'linear-gradient(160deg, #00b7e9 0%, #80cdd0 100%)',
+            height: '130%',
         }}>
+            <div className='grid gap-6 mb-6 md:grid-cols-2' style={{padding:'5%',marginBottom:'0%'}}>
+                <div>
+                    <img src='static/images/Pillimage.png' style={{
+                        paddingTop:'20%',
+                        marginLeft: 'auto',
+                        marginRight: 'auto',
+                        width: '50%'
+                       
+                    }}/>
+                    <p style={{textAlign:'center',color:'whitesmoke',fontSize:'3rem'}}>WELCOME !!</p>
+                </div>
         <div style={{
             display: 'flex',
             justifyContent: 'center',
         }}>
           {
-             <fieldset style={{backgroundColor: '#eeeeee', padding: '2em',marginTop:'3%'}}>
-             <div className="signup">
+             <fieldset style={{backgroundColor: '#eeeeee', padding: '3em',marginTop:'3%'}}>
+             <div className="signup" >
                <h1>Signup</h1>
                <form>
                
@@ -59,14 +69,14 @@ function PharmacySignup(){
        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
    </form>
                </form><br></br>
-               <button onClick={handleSignin}>Already have an account? sign in</button>
+      
              </div>
              </fieldset>
    
           }
            
         </div></div>
-    
+        </div>
     )
 
 }

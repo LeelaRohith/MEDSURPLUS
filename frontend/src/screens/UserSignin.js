@@ -2,21 +2,14 @@ import { Avatar } from 'flowbite-react'
 import React, { useState } from 'react'
 
 function UserSignin() {
-  const [isSignup, setsignup] = useState(0)
-  function handleSignup() {
-    setsignup(1)
-  }
-  function handleSignin() {
-    setsignup(0)
-  }
+  
  
  
   return (
 
     
-    <div style={{background: '#74ebd5'  ,/* fallback for old browsers */
-    background: '-webkit-linear-gradient(to right, #ACB6E5, #74ebd5)', /* Chrome 10-25, Safari 5.1-6 */
-    background: 'linear-gradient(to right, #ACB6E5, #74ebd5)', /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    <div style={{backgroundColor: '#00b7e9',height:'350%',
+    backgroundImage: 'linear-gradient(160deg, #00b7e9 0%, #80cdd0 100%)',
     height: '100vh',
     }}>
       
@@ -52,7 +45,7 @@ function UserSignin() {
 </form>
 
             </form><br></br>
-            <button onClick={handleSignup} style={{align:'centre',}}>not yet registered? signup</button>
+           
           </div>
           </fieldset>
         }

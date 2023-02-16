@@ -2,7 +2,8 @@ import { Route, Routes } from 'react-router-dom'
 import Home from './screens/Home'
 import UserSignin from './screens/UserSignin'
 import PharmacySignin from './screens/PharmacySignin'
-
+import PharmacySignup from './screens/PharmacySignup'
+import UserSignup from './screens/UserSignup'
 function App() {
   return (
     <Routes>
