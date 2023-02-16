@@ -1,7 +1,9 @@
 import React from 'react'
 
 function PharmacySignin() {
-  return <div>PharmacySignin</div>
+  return <div >
+  
+  </div>
 }
 
 export default PharmacySignin

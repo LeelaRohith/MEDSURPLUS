@@ -21,6 +21,7 @@ code {
 :root {
   --themecolor: #645cbb;
   --lightBlue: #7286d3;
+  --textcolorHome: black;
 }
 button {
   cursor: pointer;
