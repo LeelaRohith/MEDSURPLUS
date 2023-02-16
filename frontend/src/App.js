@@ -9,6 +9,8 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/userSignin" element={<UserSignin />} />
       <Route path="/pharmacySignin" element={<PharmacySignin />} />
+      <Route path="/pharmacySignup" element={<PharmacySignup />} />
+      <Route path="/userSignup" element={<UserSignup />} />
     </Routes>
   )
 }
