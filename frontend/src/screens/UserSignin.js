@@ -2,43 +2,53 @@ import { Avatar } from 'flowbite-react'
 import React, { useState } from 'react'
 
 function UserSignin() {
-  const [isSignup, setsignup] = useState(0)
-  function handleSignup() {
-    setsignup(1)
-  }
-  function handleSignin() {
-    setsignup(0)
-  }
+  
+ 
+ 
   return (
-    <div>
-      <Avatar
-        img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-        rounded={true}
-      />
+
+    
+    <div style={{backgroundColor: '#00b7e9',height:'350%',
+    backgroundImage: 'linear-gradient(160deg, #00b7e9 0%, #80cdd0 100%)',
+    height: '100vh',
+    }}>
+      
       <div
         style={{
-          backgroundColor: 'var(--themecolor)',
-          display: 'flex',
-          justifyContent: 'center',
+            display: 'flex',
+            justifyContent: 'center',
+        
         }}
       >
-        {isSignup === 0 ? (
-          <div className="signin">
-            <h1>Signin</h1>
+        {
+            <fieldset style={{backgroundColor: '#eeeeee', padding: '3em',paddingTop:'3%', marginTop:'20vh'}}>
+          <div className="signin" style={{paddingTop:'3%'}} >
+            <h1>Signin</h1><br></br>
             <form>
-              <input />
-            </form>
-            <button onClick={handleSignup}>not yet registered? signup</button>
+               
+<form >
+  <div class="mb-6">
+    <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
+    <input type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Email/ Username" required></input>
+  </div>
+  <div class="mb-6">
+    <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
+    <input type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required></input>
+  </div>
+  <div class="flex items-start mb-6">
+    <div class="flex items-center h-5">
+      <input id="remember" type="checkbox" value="" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800" required></input>
+    </div>
+    <label for="remember" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Remember me</label>
+  </div>
+  <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+</form>
+
+            </form><br></br>
+           
           </div>
-        ) : (
-          <div className="signup">
-            <h1>Signup</h1>
-            <form>
-              <input />
-            </form>
-            <button onClick={handleSignin}>sign in</button>
-          </div>
-        )}
+          </fieldset>
+        }
       </div>
     </div>
   )
