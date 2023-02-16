@@ -1,7 +1,13 @@
-import React from 'react'
-
+import React , { useEffect }from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css'
 
 function Home() {
+  useEffect(() => {
+    AOS.init({
+      duration: 1000
+    });
+  }, []);
   return <div>
    
     <div style={{height:'350%',
@@ -39,57 +45,57 @@ function Home() {
 </nav>
 	
 <div className="grid lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-1"  style={{paddingTop:'50px'}}>
-  <div  style={{textAlign:'center', padding:'3%', backgroundColor:'white',borderRadius:'25px',margin:'50px',paddingBottom:'6%'}}>
+  <div  style={{textAlign:'center', padding:'2.5%', backgroundColor:'white',borderRadius:'25px',margin:'50px',paddingBottom:'7%'}}>
   <img src='static/images/Pharmacy_icon.png' style={{display:'block',marginLeft:'auto',marginRight:'auto',marginBottom:'1%',width:'20%',height:'20%'}}/>
   <h1  style={{fontSize:'20px'}}>For Pharmacies</h1>
   <p style={{padding:'10%', paddingTop:'40px'}}>text to be entered related to the category along with some padding and some text in the middle with center justification</p>
-  <button style={{border:'solid black 1px',borderRadius:'4px',backgroundColor:'black'}} ><a href='PharmacySignin'  style={{margin:'40px',paddingTop:'40px',color:'white'}}>Sign In</a></button><br></br><br></br>
-  <p style={{fontSize:'12px'}}>Don't have an account?&nbsp; <a href='PharmacySignup' className="hover:text-blue-600" ><b>Sign Up</b></a></p>
+  <button style={{border:'solid black 1px',borderRadius:'4px',backgroundColor:'black'}} ><a href='PharmacySignin'  style={{margin:'40px',color:'white'}}>Sign In</a></button><br></br><br></br>
+  <p style={{fontSize:'12px', paddingBottom:'2.5%'}}>Don't have an account?&nbsp; <a href='PharmacySignup' className="hover:text-blue-600" ><b>Sign Up</b></a></p>
   </div>
 
-  <div style={{textAlign:'center', padding:'3%', backgroundColor:'white',borderRadius:'25px',margin:'50px',paddingBottom:'7%'}}>
+  <div style={{textAlign:'center', padding:'2.5%', backgroundColor:'white',borderRadius:'25px',margin:'50px',paddingBottom:'7%'}}>
   <img src='static/images/User_icon.png' style={{display:'block',marginLeft:'auto',marginRight:'auto',marginBottom:'1%',width:'20%',height:'20%'}}/>
  <h1 style={{fontSize:'20px'}}>For Users</h1>
  <p style={{padding:'10%', paddingTop:'40px'}}>text to be entered related to the category along with some padding and some text in the middle with center justification</p>
- <button style={{border:'solid black 1px',borderRadius:'4px',backgroundColor:'black' }}><a href='UserSignin'  style={{margin:'40px',paddingTop:'40px',color:'white'}}>Sign In</a></button><br></br><br></br>
- <p style={{fontSize:'12px',}}>Don't have an account?&nbsp; <a href='UserSignup' className="hover:text-blue-600" ><b>Sign Up</b></a></p>
+ <button style={{border:'solid black 1px',borderRadius:'4px',backgroundColor:'black' }}><a href='UserSignin'  style={{margin:'40px',color:'white'}}>Sign In</a></button><br></br><br></br>
+ <p style={{fontSize:'12px',paddingBottom:'2.5%'}}>Don't have an account?&nbsp; <a href='UserSignup' className="hover:text-blue-600" ><b>Sign Up</b></a></p>
   </div>
 </div>
 <div id='About' style={{padding:'5%'}}>
-<h1 style={{fontSize:'30px', color:'var(--textcolorHome)',textAlign:'center'}}>ABOUT</h1>
+<h1 style={{fontSize:'30px', color:'var(--textcolorHome)',textAlign:'center'}} data-aos="zoom-in">ABOUT</h1>
 <div className="grid lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-1"  style={{paddingTop:'50px'}}>
   <div style={{padding:'8%'}}>
-  <img src="https://reactjs.org/logo-og.png" alt="React Image" style={{borderRadius:'5px'}} />
+  <img src="https://reactjs.org/logo-og.png" alt="React Image" data-aos="zoom-in" style={{borderRadius:'5px'}} />
   </div>
   <div style={{padding:'7%'}}>
-   <p style={{color:'var(--textcolorHome)'}}>This is about us what we do how we formed and what is our purpose and what is our goal</p>
+   <p style={{color:'var(--textcolorHome)'}} data-aos="zoom-in">This is about us what we do how we formed and what is our purpose and what is our goal</p>
   </div>
 </div>
 </div>
 <div id='services' style={{padding:'2%'}}></div>
-<h1 style={{fontSize:'30px', color:'var(--textcolorHome)',textAlign:'center'}}>OUR SERVICES</h1>
+<h1 style={{fontSize:'30px', color:'var(--textcolorHome)',textAlign:'center'}} data-aos="zoom-in">OUR SERVICES</h1>
 <div className="grid lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-2"  style={{paddingTop:'50px',padding:'10%',paddingBottom:'0%'}}>
   <div >
-  <img src="/static/images/person_pharmacy.png" style={{display:'block',marginLeft:'auto',marginRight:'auto',width:'50%',height:'100%',borderRadius:'10px',boxShadow: 'rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px'}} />
+  <img src="/static/images/person_pharmacy.png" data-aos="fade-up" style={{display:'block',marginLeft:'auto',marginRight:'auto',width:'50%',height:'100%',borderRadius:'10px',boxShadow: 'rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px'}} />
   </div>
   <div >
-    <p style={{textAlign:'center',paddingTop:'17%',color:'var(--textcolorHome)'}}>Text related to the services with animation person returning back to the pharmacy</p>
+    <p style={{textAlign:'center',paddingTop:'17%',color:'var(--textcolorHome)'}}  data-aos="fade-down">Text related to the services with animation person returning back to the pharmacy</p>
   </div>
 </div>
 <div className="grid lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-2"  style={{paddingTop:'20px',padding:'10%',paddingBottom:'0%'}}>
 <div >
-  <img src="/static/images/Pharm_to_Pharm.png" style={{display:'block',marginLeft:'auto',marginRight:'auto',width:'60%',height:'100%',borderRadius:'10px',boxShadow: 'rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px'}} />
+  <img src="/static/images/Pharm_to_Pharm.png"  data-aos="fade-up" style={{display:'block',marginLeft:'auto',marginRight:'auto',width:'60%',height:'100%',borderRadius:'10px',boxShadow: 'rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px'}} />
   </div>
 <div >
-    <p style={{textAlign:'center',paddingTop:'20%',color:'var(--textcolorHome)'}}>Text related to the services with animation person returning back to the pharmacy</p>
+    <p style={{textAlign:'center',paddingTop:'20%',color:'var(--textcolorHome)'}}  data-aos="fade-down">Text related to the services with animation person returning back to the pharmacy</p>
   </div>
 </div>
 <div className="grid lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-2"  style={{paddingTop:'20px',padding:'10%',paddingBottom:'10%'}}>
 <div >
-  <img src="/static/images/phone_coupon.png" style={{display:'block',marginLeft:'auto',marginRight:'auto',width:'50%',height:'100%',borderRadius:'10px',boxShadow: 'rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px'}} />
+  <img src="/static/images/phone_coupon.png"  data-aos="fade-up" style={{display:'block',marginLeft:'auto',marginRight:'auto',width:'50%',height:'100%',borderRadius:'10px',boxShadow: 'rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px'}} />
   </div>
 <div >
-    <p style={{textAlign:'center',paddingTop:'20%',color:'var(--textcolorHome)'}}>Text related to the services with animation person returning back to the pharmacy</p>
+    <p style={{textAlign:'center',paddingTop:'20%',color:'var(--textcolorHome)'}}  data-aos="fade-down">Text related to the services with animation person returning back to the pharmacy</p>
   </div>
 </div>
 
