@@ -8,10 +8,10 @@ function Home() {
       duration: 1000
     });
   }, []);
-  return <div>
+  return (<div>
    
     <div style={{height:'350%',
-    backgroundImage: 'linear-gradient(to right, #66d3e6, #61ccea, #63c5ed, #6abdee, #75b4ed, #71b8f1, #6dbbf4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1)'
+    backgroundImage: 'var(--homethemecolor)'
 , 
 }}
     >
@@ -48,7 +48,7 @@ function Home() {
   <div  style={{textAlign:'center', padding:'2.5%', backgroundColor:'white',borderRadius:'25px',margin:'50px',paddingBottom:'7%'}}>
   <img src='static/images/Pharmacy_icon.png' style={{display:'block',marginLeft:'auto',marginRight:'auto',marginBottom:'1%',width:'20%',height:'20%'}}/>
   <h1  style={{fontSize:'20px'}}>For Pharmacies</h1>
-  <p style={{padding:'10%', paddingTop:'40px'}}>text to be entered related to the category along with some padding and some text in the middle with center justification</p>
+  <p style={{padding:'10%', paddingTop:'40px'}}>Sign in to your account to gain access to all available requests and send new requests to pharmacies.</p>
   <button style={{border:'solid black 1px',borderRadius:'4px',backgroundColor:'black'}} ><a href='PharmacySignin'  style={{margin:'40px',color:'white'}}>Sign In</a></button><br></br><br></br>
   <p style={{fontSize:'12px', paddingBottom:'2.5%'}}>Don't have an account?&nbsp; <a href='PharmacySignup' className="hover:text-blue-600" ><b>Sign Up</b></a></p>
   </div>
@@ -56,7 +56,7 @@ function Home() {
   <div style={{textAlign:'center', padding:'2.5%', backgroundColor:'white',borderRadius:'25px',margin:'50px',paddingBottom:'7%'}}>
   <img src='static/images/User_icon.png' style={{display:'block',marginLeft:'auto',marginRight:'auto',marginBottom:'1%',width:'20%',height:'20%'}}/>
  <h1 style={{fontSize:'20px'}}>For Users</h1>
- <p style={{padding:'10%', paddingTop:'40px'}}>text to be entered related to the category along with some padding and some text in the middle with center justification</p>
+ <p style={{padding:'10%', paddingTop:'40px'}}>Sign in to your pharmacy account to view your medication details, sell leftover medicines online</p>
  <button style={{border:'solid black 1px',borderRadius:'4px',backgroundColor:'black' }}><a href='UserSignin'  style={{margin:'40px',color:'white'}}>Sign In</a></button><br></br><br></br>
  <p style={{fontSize:'12px',paddingBottom:'2.5%'}}>Don't have an account?&nbsp; <a href='UserSignup' className="hover:text-blue-600" ><b>Sign Up</b></a></p>
   </div>
@@ -65,10 +65,10 @@ function Home() {
 <h1 style={{fontSize:'30px', color:'var(--textcolorHome)',textAlign:'center'}} data-aos="zoom-in">ABOUT</h1>
 <div className="grid lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-1"  style={{paddingTop:'50px'}}>
   <div style={{padding:'8%'}}>
-  <img src="https://reactjs.org/logo-og.png" alt="React Image" data-aos="zoom-in" style={{borderRadius:'5px'}} />
+  <img src="static/images/goal.png" alt="React Image" data-aos="zoom-in" style={{borderRadius:'5px',boxShadow: 'rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px'}} />
   </div>
   <div style={{padding:'7%'}}>
-   <p style={{color:'var(--textcolorHome)'}} data-aos="zoom-in">This is about us what we do how we formed and what is our purpose and what is our goal</p>
+   <p style={{color:'var(--textcolorHome)',paddingTop:'13%',paddingLeft:'2%',justifyContent:'center'}} data-aos="zoom-in">The majority of medications are left unused once a patient has been healed of their illness.<br></br><br></br>Our goal is to link patients and pharmacies to exchange medications, which will reduce the amount of medical waste created by medications by 80%.</p>
   </div>
 </div>
 </div>
@@ -79,7 +79,7 @@ function Home() {
   <img src="/static/images/person_pharmacy.png" data-aos="fade-up" style={{display:'block',marginLeft:'auto',marginRight:'auto',width:'50%',height:'100%',borderRadius:'10px',boxShadow: 'rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px'}} />
   </div>
   <div >
-    <p style={{textAlign:'center',paddingTop:'17%',color:'var(--textcolorHome)'}}  data-aos="fade-down">Text related to the services with animation person returning back to the pharmacy</p>
+    <p style={{textAlign:'center',paddingTop:'17%',color:'var(--textcolorHome)'}}  data-aos="fade-down">Linking users and pharmacies for drug returns</p>
   </div>
 </div>
 <div className="grid lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-2"  style={{paddingTop:'20px',padding:'10%',paddingBottom:'0%'}}>
@@ -87,7 +87,7 @@ function Home() {
   <img src="/static/images/Pharm_to_Pharm.png"  data-aos="fade-up" style={{display:'block',marginLeft:'auto',marginRight:'auto',width:'60%',height:'100%',borderRadius:'10px',boxShadow: 'rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px'}} />
   </div>
 <div >
-    <p style={{textAlign:'center',paddingTop:'20%',color:'var(--textcolorHome)'}}  data-aos="fade-down">Text related to the services with animation person returning back to the pharmacy</p>
+    <p style={{textAlign:'center',paddingTop:'20%',color:'var(--textcolorHome)'}}  data-aos="fade-down">Facilitating the interchange of spare stock medicines between pharmacies</p>
   </div>
 </div>
 <div className="grid lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-2"  style={{paddingTop:'20px',padding:'10%',paddingBottom:'10%'}}>
@@ -95,12 +95,13 @@ function Home() {
   <img src="/static/images/phone_coupon.png"  data-aos="fade-up" style={{display:'block',marginLeft:'auto',marginRight:'auto',width:'50%',height:'100%',borderRadius:'10px',boxShadow: 'rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px'}} />
   </div>
 <div >
-    <p style={{textAlign:'center',paddingTop:'20%',color:'var(--textcolorHome)'}}  data-aos="fade-down">Text related to the services with animation person returning back to the pharmacy</p>
+    <p style={{textAlign:'center',paddingTop:'20%',color:'var(--textcolorHome)'}}  data-aos="fade-down">Selling medications on our platform will earn you vouchers for future purchases.</p>
   </div>
 </div>
-
-</div>
-    </div>
+        </div> 
+      </div>
+    
+  )
 }
 
 export default Home
