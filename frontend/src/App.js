@@ -10,6 +10,9 @@ import PharmacySignup from './screens/PharmacySignup'
 import UserSignup from './screens/UserSignup'
 import Maps from './screens/UserDashboard/Maps'
 
+import PendingRequests from './screens/Pharmacy dashboard/Pendingrequests'
+import AcceptedRequests from './screens/Pharmacy dashboard/Acceptedrequests'
+
 function App() {
   return (
     <Routes>
@@ -22,6 +25,14 @@ function App() {
       <Route path="/user/Getdetails" element={<GetDetails />} />
       <Route path="/user/Rewards" element={<Rewards></Rewards>} />
       <Route path="/user/Nearbypharmacies" element={<Maps />} />
+      <Route
+        path="/pharmacy/pending_requests"
+        element={<PendingRequests></PendingRequests>}
+      />
+      <Route
+        path="/pharmacy/accepted_customers"
+        element={<AcceptedRequests></AcceptedRequests>}
+      />
     </Routes>
   )
 }
