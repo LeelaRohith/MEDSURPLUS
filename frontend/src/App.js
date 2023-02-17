@@ -5,6 +5,8 @@ import PharmacySignin from "./screens/PharmacySignin";
 import Requests from "./screens/User dashboard/Requests";
 import GetDetails from "./screens/User dashboard/GetDetails";
 import Rewards from "./screens/User dashboard/Rewards";
+import PendingRequests from "./screens/Pharmacy dashboard/Pendingrequests";
+import AcceptedRequests from "./screens/Pharmacy dashboard/Acceptedrequests";
 
 function App() {
   return (
@@ -15,6 +17,14 @@ function App() {
       <Route path="/user/Requests" element={<Requests />} />
       <Route path="/user/Getdetails" element={<GetDetails></GetDetails>} />
       <Route path="/user/Rewards" element={<Rewards></Rewards>} />
+      <Route
+        path="/pharmacy/pending_requests"
+        element={<PendingRequests></PendingRequests>}
+      />
+      <Route
+        path="/pharmacy/accepted_customers"
+        element={<AcceptedRequests></AcceptedRequests>}
+      />
     </Routes>
   );
 }
