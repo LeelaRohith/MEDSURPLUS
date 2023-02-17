@@ -39,8 +39,17 @@ router.post(
 router.get('/medicines', async (req, res) => {
   try {
     const medicines = await Medicine.find({}, 'name -_id')
-
-    return res.status(200).send(medicines)
+    let medicineName = []
+    async function getMedicineArray(medicines) {
+      return new Promise((resolve, reject) => {
+        medicines.forEach((element) => {
+          medicineName.push(element.name)
+        })
+        resolve(medicineName)
+      })
+    }
+    getMedicineArray(medicines)
+    return res.status(200).send(medicineName)
   } catch (err) {
     res.status(500).send({ message: 'Internal server error' })
   }
