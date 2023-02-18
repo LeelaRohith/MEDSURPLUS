@@ -14,7 +14,7 @@ router.post("/sell", authorizeUser, upload.single("file"), async (req, res) => {
       return res.status(402).send({ message: "All fields are required" });
     }
     const image = fs.readFileSync(req.file.path, "base64");
-    console.log(req.file.path);
+
     const newRequest = await new Request({
       name,
       image,
