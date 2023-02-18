@@ -3,6 +3,12 @@ import { authorizeUser } from '../middlewares/authorizeUser.js'
 import { Request } from '../models/requests.schema.js'
 import { Reward } from '../models/rewards.schema.js'
 import { Pharmacy } from '../models/pharmacy.schema.js'
+import fs from 'fs'
+import path from 'path'
+
+const __dirname = path.dirname(new URL(import.meta.url).pathname)
+
+const filePath = path.join(__dirname, '..', 'uploads', 'discount1.jpg')
 
 const router = express.Router()
 
@@ -25,35 +31,44 @@ router.patch('/pharmacy/delivered', authorizeUser, async (req, res) => {
       { _id: orderId },
       { status: 'delivered' }
     )
-
     const order = await Request.findOne({ _id: orderId }).populate(
       'pharmacyId userId'
     )
 
-    let type, reward, organisation
+    let type,
+      reward,
+      organisation,
+      image = null
     if (order.expiry === 'expired') {
       type = 'coupon'
       reward = 'Get 40% off on selected items'
       organisation = '1mg'
-      image = fs.readFileSync('../uploads/1mg.png', 'base64')
+      image = fs.readFileSync('uploads/1mg.png', 'base64')
     } else {
       type = 'discount'
       reward = 'Get 20% off on next purchase'
       organisation = order.pharmacyId.name
-      image = fs.readFileSync('../uploads/discount1.jpg', 'base64')
+
+      image = fs.readFileSync('uploads/discount1.jpg', 'base64')
+      console.log(image)
     }
+
     const newReward = await new Reward({
       orderId,
       type,
       reward,
       organisation,
+      image,
       userId: order.userId._id,
     }).save()
+    console.log(4)
+
     res.status(200).send({
       message: 'user successfully delivered and reward is on its way',
     })
   } catch (err) {
-    return res.status(500).send({ message: 'Internal server error' })
+    console.log(err)
+    return res.status(500).send({ message: 'Internal server error', err })
   }
 })
 

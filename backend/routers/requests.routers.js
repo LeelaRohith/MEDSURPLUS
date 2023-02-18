@@ -43,7 +43,9 @@ router.get('/requests', authorizeUser, async (req, res) => {
 
 router.get('/pendingRequests', authorizeUser, async (req, res) => {
   try {
-    const requests = await Request.find({ status: 'pending' })
+    const requests = await Request.find({ status: 'pending' }).populate(
+      'userId'
+    )
     res.status(200).send(requests)
   } catch (err) {
     return res.status(500).send({ message: 'Internal server' })
