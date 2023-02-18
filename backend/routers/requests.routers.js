@@ -10,6 +10,9 @@ const router = express.Router()
 router.post('/sell', authorizeUser, upload.single('file'), async (req, res) => {
   try {
     const { name, quantity, expiry } = req.body
+    if (!name && !quantity && !expiry) {
+      return res.status(402).send({ message: 'All fields are required' })
+    }
     const image = fs.readFileSync(req.file.path, 'base64')
 
     const newRequest = await new Request({
@@ -20,6 +23,7 @@ router.post('/sell', authorizeUser, upload.single('file'), async (req, res) => {
       status: 'pending',
       userId: req.userId,
     }).save()
+    fs.unlinkSync(req.file.path)
     return res.status(200).send({ message: 'successfully placed the order' })
   } catch (err) {
     return res.status(500).send({ message: 'Internal server error', err })

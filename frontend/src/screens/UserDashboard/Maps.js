@@ -4,6 +4,7 @@ import Map, { Marker } from 'react-map-gl'
 
 import 'mapbox-gl/dist/mapbox-gl.css'
 import UserNavbar from './Navbar'
+import { Axios } from '../../utils/Axios'
 
 function Maps() {
   const [userCoordinates, setuserCoordinates] = useState()
@@ -15,6 +16,15 @@ function Maps() {
       })
     })
   }, [])
+  const [pharmacyCoordinates, setpharmacyCoordinates] = useState()
+  useEffect(() => {
+    async function getCoords() {
+      const res = await Axios.get('/pharmaciesCoordinates')
+      setpharmacyCoordinates(res.data)
+    }
+    getCoords()
+  }, [])
+  console.log(pharmacyCoordinates)
   return (
     <>
       <UserNavbar />
@@ -24,7 +34,7 @@ function Maps() {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            backgroundImage:'var(--homethemecolor)'
+            backgroundImage: 'var(--homethemecolor)',
           }}
         >
           <Map
@@ -37,22 +47,38 @@ function Maps() {
             style={{
               width: '80vw',
               height: '100vh',
-              marginTop:'2.3rem'
+              marginTop: '2.3rem',
             }}
             mapStyle="mapbox://styles/mapbox/streets-v12"
           >
-            <Marker longitude={-122.4} latitude={36.8} color="red">
-              <LocalHospitalIcon />
-            </Marker>
-            <Marker longitude={-120.4} latitude={37.6} color="red" />
-            <Marker longitude={-112.4} latitude={37.8} color="red">
-              <img
-                style={{ width: '45px', height: '45px' }}
-                src="/static/images/pharmacyLocation.png"
-                alt="pharmacy"
-              />
-            </Marker>
-            <Marker longitude={-125.4} latitude={38.8} color="red" />
+            {pharmacyCoordinates &&
+              pharmacyCoordinates.map((coords, idx) => {
+                console.log(coords.lattitude)
+                return (
+                  <Marker
+                    key={idx}
+                    longitude={coords.longitude}
+                    latitude={coords.lattitude}
+                    color="red"
+                  >
+                    <div
+                      style={{
+                        color: 'red',
+                        fontSize: '14px',
+                        fontStyle: 'bold',
+                      }}
+                      className="drop-shadow-lg"
+                    >
+                      <b>{coords.name}</b>
+                    </div>
+                    <img
+                      style={{ width: '45px', height: '45px' }}
+                      src="/static/images/pharmacyLocation.png"
+                      alt="pharmacy"
+                    />
+                  </Marker>
+                )
+              })}
           </Map>
         </div>
       ) : null}

@@ -1,21 +1,33 @@
-import UserNavbar from "./Navbar";
+import { useEffect, useState } from 'react'
+import UserNavbar from './Navbar'
+import { Axios } from '../../utils/Axios'
 function Rewards() {
   const rewarddetails = [
-    { text: "Get 50 % Off", code: "", shopname: "763789DFST" },
-  ];
+    { text: 'Get 50 % Off', code: '', shopname: '763789DFST' },
+  ]
+
+  const [rewards, setrewards] = useState()
+  useEffect(() => {
+    async function getRewards() {
+      const res = await Axios.get('/rewards')
+      setrewards(res.data)
+    }
+    getRewards()
+  }, [])
+
   return (
     <div>
       <div>
-        <UserNavbar></UserNavbar>
+        <UserNavbar />
       </div>
-      <div style={{ backgroundColor: "var(--themecolor)", minHeight: "81vh" }}>
+      <div style={{ backgroundColor: 'var(--themecolor)', minHeight: '81vh' }}>
         <p
           style={{
-            textAlign: "left",
-            color: "white",
-            fontSize: "20px",
-            paddingTop: "20px",
-            marginLeft: "20px",
+            textAlign: 'left',
+            color: 'white',
+            fontSize: '20px',
+            paddingTop: '20px',
+            marginLeft: '20px',
           }}
         >
           Discounts
@@ -23,59 +35,51 @@ function Rewards() {
         <div
           className="grid"
           style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "flex-start",
-            flexWrap: "wrap",
-            minHeight: "88vh",
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'flex-start',
+            flexWrap: 'wrap',
+            minHeight: '88vh',
           }}
         >
-          {rewarddetails.map((item, index) => {
-            return (
-              <div
-                style={{
-                  backgroundColor: "white",
-                  height: "300px",
-                  width: "280px",
-                  margin: "34px",
-                  borderRadius: "20px",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "flex-start",
-                }}
-              >
-                <div>
-                  <img
-                    src="/static/images/discount1.jpg"
-                    width="250px"
-                    height="80px"
-                    style={{
-                      marginLeft: "20px",
-                      paddingTop: "5px",
-                    }}
-                  ></img>
+          {rewards &&
+            rewards.map((item, index) => {
+              return (
+                <div
+                  style={{
+                    backgroundColor: 'white',
+                    height: '300px',
+                    width: '280px',
+                    margin: '34px',
+                    borderRadius: '20px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'flex-start',
+                  }}
+                >
+                  <div>
+                    <img
+                      src={`data:image/png;base64,${item.image}`}
+                      width="250px"
+                      height="80px"
+                      style={{
+                        marginLeft: '20px',
+                        paddingTop: '5px',
+                      }}
+                      alt=""
+                    ></img>
+                  </div>
+                  <div style={{ textAlign: 'center', marginTop: '10px' }}>
+                    {item.reward}
+                    <br></br> Code : {item.orderId} <br></br> Medical Shop :{' '}
+                    {item.organisation}
+                  </div>
                 </div>
-                <div style={{ textAlign: "center", marginTop: "10px" }}>
-                  {item.text}
-                  <br></br> Code : {item.code} <br></br> Medical Shop :{" "}
-                  {item.shopname}
-                </div>
-              </div>
-            );
-          })}
+              )
+            })}
         </div>
-        <p
-          style={{
-            textAlign: "left",
-            color: "white",
-            margin: "20px",
-            fontSize: "20px",
-          }}
-        >
-          Coupons
-        </p>
       </div>
     </div>
-  );
+  )
 }
-export default Rewards;
+export default Rewards

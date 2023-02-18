@@ -5,15 +5,12 @@ import { Axios } from '../../utils/Axios'
 import { useEffect, useState } from 'react'
 
 function GetDetails() {
-  const details = null
-  const [medicines, setmedicines] = useState()
-  useEffect(() => {
-    async function getMedicines() {
-      const res = await Axios.get('/medicines')
-      console.log(res)
-    }
-    getMedicines()
-  }, [])
+  const [medicineName, setmedicineName] = useState()
+  const [response, setresponse] = useState()
+  const getUsage = async () => {
+    const res = await Axios.post('/chatgpt', { medicineName })
+    setresponse(res.data)
+  }
   return (
     <div>
       <div>
@@ -38,9 +35,17 @@ function GetDetails() {
             }}
             type="text"
             placeholder="Enter name of the tablet"
+            onChange={(e) => setmedicineName(e.target.value)}
           ></input>
+
           <div>
-            <Button style={{ backgroundColor: 'var(--lightBlue)' }}>
+            <Button
+              onClick={(e) => {
+                e.preventDefault()
+                getUsage()
+              }}
+              style={{ backgroundColor: 'var(--lightBlue)' }}
+            >
               Get Details
             </Button>
           </div>
@@ -60,7 +65,7 @@ function GetDetails() {
         }}
       >
         <br></br>
-        {details ? (
+        {!response ? (
           <div
             style={{
               fontWeight: 'bold',
@@ -77,158 +82,15 @@ function GetDetails() {
             style={{
               backgroundColor: 'white',
               height: '',
-              width: '80%',
-              padding: '30px',
+              width: '50%',
+              padding: '50px',
               borderRadius: '20px',
               textAlign: 'left',
+              fontSize: '20px',
               boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px',
             }}
           >
-            <div style={{ fontSize: '20px' }}>Usage</div>
-            <p className="mt-2 text-slate-500" style={{ paddingLeft: '20px' }}>
-              Use the border property to change the border size and color, and
-              use the border-radius property to add rounded corners:
-            </p>
-            {/* <hr
-              style={{
-                border: "dotted #D4D4D4 4px",
-                borderBottom: "none",
-                width: "5%",
-                margin: "10px auto",
-              }}
-            ></hr> */}
-            <Divider variant="inset" sx={{ margin: '10px auto' }} />
-            <div style={{ fontSize: '20px' }}>How to use</div>
-            <p className="mt-2 text-slate-500" style={{ paddingLeft: '20px' }}>
-              Use the border property to change the border size and color, and
-              use the border-radius property to add rounded corners:
-            </p>
-            <Divider variant="inset" sx={{ margin: '10px auto' }} />
-            <div style={{ fontSize: '20px' }}>Side effects</div>
-            <p className="mt-2 text-slate-500" style={{ paddingLeft: '20px' }}>
-              Use the border property to change the border size and color, and
-              use the border-radius property to add rounded corners:
-            </p>
-            {/* <hr
-              style={{
-                border: "dotted #D4D4D4 4px",
-                borderBottom: "none",
-                width: "5%",
-                margin: "10px auto",
-              }}
-            ></hr> */}
-            <Divider variant="inset" sx={{ margin: '10px auto' }} />
-            <div style={{ fontSize: '20px' }}>Duration of Action</div>
-            <p className="mt-2 text-slate-500" style={{ paddingLeft: '20px' }}>
-              Use the border property to change the border size and color, and
-              use the border-radius property to add rounded corners:
-            </p>
-            {/* <hr
-              style={{
-                border: "dotted #D4D4D4 4px",
-                borderBottom: "none",
-                width: "5%",
-                margin: "10px auto",
-              }}
-            ></hr> */}
-            <Divider variant="inset" sx={{ margin: '10px auto' }} />
-            <div style={{ fontSize: '20px' }}>Contradiction</div>
-            <p className="mt-2 text-slate-500" style={{ paddingLeft: '20px' }}>
-              Use the border property to change the border size and color, and
-              use the border-radius property to add rounded corners:
-            </p>
-            {/* <hr
-              style={{
-                border: "dotted #D4D4D4 4px",
-                borderBottom: "none",
-                width: "5%",
-                margin: "10px auto",
-              }}
-            ></hr> */}
-            <div style={{ fontSize: '20px' }}>
-              Special Precautions while taking
-            </div>
-            <p className="mt-2 text-slate-500" style={{ paddingLeft: '20px' }}>
-              Use the border property to change the border size and color, and
-              use the border-radius property to add rounded corners:
-            </p>
-            {/* <hr
-              style={{
-                border: "dotted #D4D4D4 4px",
-                borderBottom: "none",
-                width: "5%",
-                margin: "10px auto",
-              }}
-            ></hr> */}
-            <Divider variant="inset" sx={{ margin: '10px auto' }} />
-            <div style={{ fontSize: '20px' }}>
-              Pregnancy Related information
-            </div>
-            <p className="mt-2 text-slate-500" style={{ paddingLeft: '20px' }}>
-              Use the border property to change the border size and color, and
-              use the border-radius property to add rounded corners:
-            </p>
-            {/* <hr
-              style={{
-                border: "dotted #D4D4D4 4px",
-                borderBottom: "none",
-                width: "5%",
-                margin: "10px auto",
-              }}
-            ></hr> */}
-            <Divider variant="inset" sx={{ margin: '10px auto' }} />
-            <div style={{ fontSize: '20px' }}>Storage requirements</div>
-            <p className="mt-2 text-slate-500" style={{ paddingLeft: '20px' }}>
-              Use the border property to change the border size and color, and
-              use the border-radius property to add rounded corners:
-            </p>
-            {/* <hr
-              style={{
-                border: "dotted #D4D4D4 4px",
-                borderBottom: "none",
-                width: "5%",
-                margin: "10px auto",
-              }}
-            ></hr> */}
-            <Divider variant="inset" sx={{ margin: '10px auto' }} />
-            <div style={{ fontSize: '20px' }}>Effects of overdose</div>
-            <p className="mt-2 text-slate-500" style={{ paddingLeft: '20px' }}>
-              Use the border property to change the border size and color, and
-              use the border-radius property to add rounded corners:
-            </p>
-            {/* <hr
-              style={{
-                border: "dotted #D4D4D4 4px",
-                borderBottom: "none",
-                width: "5%",
-                margin: "10px auto",
-              }}
-            ></hr> */}
-            <Divider variant="inset" sx={{ margin: '10px auto' }} />
-            <div style={{ fontSize: '20px' }}>Expert Advice :</div>
-            <p className="mt-2 text-slate-500" style={{ paddingLeft: '20px' }}>
-              n/a
-            </p>
-            <Divider variant="inset" sx={{ margin: '10px auto' }} />
-            <div style={{ fontSize: '20px' }}>Packaging type :</div>
-            <p className="mt-2 text-slate-500" style={{ paddingLeft: '20px' }}>
-              Use the border property to change the border size and color, and
-              use the border-radius property to add rounded corners:
-            </p>
-            {/* <hr
-              style={{
-                border: "dotted #D4D4D4 4px",
-                borderBottom: "none",
-                width: "5%",
-                margin: "10px auto",
-              }}
-            ></hr> */}
-            <Divider variant="inset" sx={{ margin: '10px auto' }} />
-            <div style={{ fontSize: '20px' }}>MRP :</div>
-            <p className="mt-2 text-slate-500" style={{ paddingLeft: '20px' }}>
-              Use the border property to change the border size and color, and
-              use the border-radius property to add rounded corners:
-            </p>
+            {response}
           </div>
         )}
       </div>

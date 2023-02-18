@@ -13,6 +13,9 @@ const rewardSchema = new mongoose.Schema({
   organisation: {
     type: String,
   },
+  image: {
+    type: String,
+  },
   userId: {
     type: String,
   },

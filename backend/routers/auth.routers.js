@@ -11,7 +11,7 @@ router.post('/userSignin', async (req, res) => {
     const { email, password } = req.body
     const foundUser = await User.findOne({ email: req.body.email })
     if (!foundUser) {
-      res.status(400).send({ message: 'Email is not registered with us' })
+      res.status(402).send({ message: 'Email is not registered with us' })
       return
     }
     if (foundUser.password === password) {
@@ -22,7 +22,7 @@ router.post('/userSignin', async (req, res) => {
         jwtToken: signJwtToken(userId),
       })
     } else {
-      return res.status(400).send({ message: 'Invalid password' })
+      return res.status(402).send({ message: 'Invalid password' })
     }
   } catch (err) {
     return res.status(500).send({ message: 'Internal server' })

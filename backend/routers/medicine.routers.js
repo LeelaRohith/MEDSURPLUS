@@ -6,16 +6,21 @@ import { upload } from '../middlewares/multer.js'
 import { ChatGPTAPI } from 'chatgpt'
 
 const api = new ChatGPTAPI({
-  apiKey: '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',
+  apiKey: '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',
 })
 
 const router = express.Router()
 
 router.post('/chatgpt', async (req, res) => {
-  const query =
-    'For what disease the medicine ' + req.body.medicineName + ' is used'
-  const resp = await api.sendMessage(query)
-  res.status(200).send(resp.text)
+  try {
+    const query =
+      'For what purpose the medicine ' + req.body.medicineName + ' is used'
+    const resp = await api.sendMessage(query)
+    res.status(200).send(resp.text)
+  } catch (err) {
+    console.log(err)
+    res.status(500).send({ message: 'Internal server error', err })
+  }
 })
 
 router.post(
