@@ -1,38 +1,38 @@
-import express from 'express'
-import { User } from '../models/user.schema.js'
-import { authorizeUser } from '../middlewares/authorizeUser.js'
-import { signJwtToken } from '../utils/jwt.js'
-import { Pharmacy } from '../models/pharmacy.schema.js'
+import express from "express";
+import { User } from "../models/user.schema.js";
+import { authorizeUser } from "../middlewares/authorizeUser.js";
+import { signJwtToken } from "../utils/jwt.js";
+import { Pharmacy } from "../models/pharmacy.schema.js";
 
-const router = express.Router()
+const router = express.Router();
 
-router.post('/userSignin', async (req, res) => {
+router.post("/userSignin", async (req, res) => {
   try {
-    const { email, password } = req.body
-    const foundUser = await User.findOne({ email: req.body.email })
+    const { email, password } = req.body;
+    const foundUser = await User.findOne({ email: req.body.email });
     if (!foundUser) {
-      res.status(402).send({ message: 'Email is not registered with us' })
-      return
+      res.status(402).send({ message: "Email is not registered with us" });
+      return;
     }
     if (foundUser.password === password) {
-      const userId = foundUser._id
+      const userId = foundUser._id;
 
       return res.status(200).send({
-        message: 'User successfully authenticated',
+        message: "User successfully authenticated",
         jwtToken: signJwtToken(userId),
-      })
+      });
     } else {
-      return res.status(402).send({ message: 'Invalid password' })
+      return res.status(402).send({ message: "Invalid password" });
     }
   } catch (err) {
-    return res.status(500).send({ message: 'Internal server' })
+    return res.status(500).send({ message: "Internal server" });
   }
-})
+});
 
-router.post('/userSignup', async (req, res) => {
+router.post("/userSignup", async (req, res) => {
   try {
     const { username, email, password, contactNo, address, city, state } =
-      req.body
+      req.body;
     if (
       !username &&
       !email &&
@@ -42,13 +42,13 @@ router.post('/userSignup', async (req, res) => {
       !city &&
       !state
     ) {
-      return res.status(400).send({ message: 'All fields are required' })
+      return res.status(400).send({ message: "All fields are required" });
     }
-    const foundUser = await User.findOne({ email: req.body.email })
+    const foundUser = await User.findOne({ email: req.body.email });
     if (foundUser) {
       return res.status(400).send({
-        message: 'This email is already registered with us',
-      })
+        message: "This email is already registered with us",
+      });
     }
     const newUser = await new User({
       username,
@@ -58,37 +58,37 @@ router.post('/userSignup', async (req, res) => {
       address,
       city,
       state,
-    }).save()
+    }).save();
 
-    return res.status(200).send({ message: 'Successfully registered' })
+    return res.status(200).send({ message: "Successfully registered" });
   } catch (err) {
-    return res.status(500).send({ message: 'Internal server' })
+    return res.status(500).send({ message: "Internal server" });
   }
-})
+});
 
-router.post('/pharmacySignin', async (req, res) => {
+router.post("/pharmacySignin", async (req, res) => {
   try {
-    const { email, password } = req.body
-    const foundPharmacy = await Pharmacy.findOne({ email: req.body.email })
+    const { email, password } = req.body;
+    const foundPharmacy = await Pharmacy.findOne({ email: req.body.email });
     if (!foundPharmacy) {
-      res.status(400).send({ message: 'Email is not registered with us' })
-      return
+      res.status(400).send({ message: "Email is not registered with us" });
+      return;
     }
     if (foundPharmacy.password === password) {
-      const userId = foundPharmacy._id
+      const userId = foundPharmacy._id;
       return res.status(200).send({
-        message: 'User successfully authenticated',
+        message: "User successfully authenticated",
         jwtToken: signJwtToken(userId),
-      })
+      });
     } else {
-      return res.status(400).send({ message: 'Invalid password' })
+      return res.status(400).send({ message: "Invalid password" });
     }
   } catch (err) {
-    return res.status(500).send({ message: 'Internal server' })
+    return res.status(500).send({ message: "Internal server" });
   }
-})
+});
 
-router.post('/pharmacySignup', async (req, res) => {
+router.post("/pharmacySignup", async (req, res) => {
   try {
     const {
       name,
@@ -100,7 +100,7 @@ router.post('/pharmacySignup', async (req, res) => {
       state,
       lattitude,
       longitude,
-    } = req.body
+    } = req.body;
     if (
       !name &&
       !email &&
@@ -112,13 +112,13 @@ router.post('/pharmacySignup', async (req, res) => {
       !lattitude &&
       !longitude
     ) {
-      return res.status(400).send({ message: 'All fields are required' })
+      return res.status(400).send({ message: "All fields are required" });
     }
-    const foundPharmacy = await Pharmacy.findOne({ email: req.body.email })
+    const foundPharmacy = await Pharmacy.findOne({ email: req.body.email });
     if (foundPharmacy) {
       return res.status(400).send({
-        message: 'This email is already registered with us',
-      })
+        message: "This email is already registered with us",
+      });
     }
     const newPharmacy = await new Pharmacy({
       name,
@@ -130,12 +130,12 @@ router.post('/pharmacySignup', async (req, res) => {
       state,
       lattitude,
       longitude,
-    }).save()
+    }).save();
 
-    return res.status(200).send({ message: 'Successfully registered' })
+    return res.status(200).send({ message: "Successfully registered" });
   } catch (err) {
-    return res.status(500).send({ message: 'Internal server' })
+    return res.status(500).send({ message: "Internal server" });
   }
-})
+});
 
-export const AuthRouters = router
+export const AuthRouters = router;

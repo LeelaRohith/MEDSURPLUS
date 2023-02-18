@@ -1,46 +1,46 @@
-import { Avatar } from 'flowbite-react'
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { Axios } from '../utils/Axios'
+import { Avatar } from "flowbite-react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Axios } from "../utils/Axios";
 
 function UserSignin() {
   const [userDetails, setuserDetails] = useState({
-    email: '',
-    password: '',
-  })
-  const navigate = useNavigate()
+    email: "",
+    password: "",
+  });
+  const navigate = useNavigate();
 
   const handleSubmit = async () => {
     try {
-      const res = await Axios.post('/userSignin', userDetails)
+      const res = await Axios.post("/userSignin", userDetails);
 
       if (res) {
-        localStorage.setItem('jwtKey', res.data.jwtToken)
-        console.log(res.data.message)
+        localStorage.setItem("jwtKey", res.data.jwtToken);
+        console.log(res.data.message);
 
-        navigate('/user/Requests')
+        navigate("/user/Requests");
       }
     } catch (err) {
-      console.log(err.response.data.message)
+      console.log(err.response.data.message);
     }
-  }
+  };
 
   return (
     <div
       style={{
         backgroundImage:
-          'linear-gradient(to right, #66d3e6, #61ccea, #63c5ed, #6abdee, #75b4ed, #71b8f1, #6dbbf4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1)',
-        height: '100vh',
+          "linear-gradient(to right, #66d3e6, #61ccea, #63c5ed, #6abdee, #75b4ed, #71b8f1, #6dbbf4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1)",
+        height: "100vh",
       }}
     >
       <br></br>
       <span
         className="font-semibold text-xl tracking-tight"
         style={{
-          color: 'black',
-          paddingLeft: '40px',
-          paddingTop: '20px',
-          fontSize: '160%',
+          color: "black",
+          paddingLeft: "40px",
+          paddingTop: "20px",
+          fontSize: "160%",
         }}
       >
         MEDSURPLUS
@@ -48,34 +48,34 @@ function UserSignin() {
 
       <div
         style={{
-          display: 'flex',
-          justifyContent: 'center',
+          display: "flex",
+          justifyContent: "center",
         }}
       >
         {
           <fieldset
             style={{
-              backgroundColor: '#eeeeee',
-              padding: '2em',
-              paddingTop: '2%',
-              borderRadius: '10px',
-              boxshadow: '0 0 15px #000',
-              marginTop: '5.5%',
-              boxShadow: 'rgba(0, 0, 0, 0.15) 0px 3px 3px 0px',
+              backgroundColor: "#eeeeee",
+              padding: "2em",
+              paddingTop: "2%",
+              borderRadius: "10px",
+              boxshadow: "0 0 15px #000",
+              marginTop: "5.5%",
+              boxShadow: "rgba(0, 0, 0, 0.15) 0px 3px 3px 0px",
             }}
           >
             <div className="signin" style={{}}>
               <p
                 style={{
-                  textAlign: 'center',
-                  fontSize: '180%',
-                  fontFamily: 'sans-serif',
+                  textAlign: "center",
+                  fontSize: "180%",
+                  fontFamily: "sans-serif",
                 }}
               >
                 Sign in
               </p>
               <br></br>
-              <form style={{ width: '100%' }}>
+              <form style={{ width: "100%" }}>
                 <div className="mb-6">
                   <label
                     htmlFor="email"
@@ -135,13 +135,13 @@ function UserSignin() {
                     Remember me
                   </label>
                 </div>
-                <div style={{ align: 'center', marginLeft: 'auto' }}>
+                <div style={{ align: "center", marginLeft: "auto" }}>
                   <button
                     type="submit"
                     className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                     onClick={(e) => {
-                      e.preventDefault()
-                      handleSubmit()
+                      e.preventDefault();
+                      handleSubmit();
                     }}
                   >
                     Submit
@@ -154,7 +154,7 @@ function UserSignin() {
         }
       </div>
     </div>
-  )
+  );
 }
 
-export default UserSignin
+export default UserSignin;
