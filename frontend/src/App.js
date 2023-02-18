@@ -5,11 +5,9 @@ import PharmacySignin from './screens/PharmacySignin'
 import Requests from './screens/UserDashboard/Requests'
 import GetDetails from './screens/UserDashboard/GetDetails'
 import Rewards from './screens/UserDashboard/Rewards'
-
 import PharmacySignup from './screens/PharmacySignup'
 import UserSignup from './screens/UserSignup'
 import Maps from './screens/UserDashboard/Maps'
-
 import PendingRequests from './screens/Pharmacy dashboard/Pendingrequests'
 import AcceptedRequests from './screens/Pharmacy dashboard/Acceptedrequests'
 

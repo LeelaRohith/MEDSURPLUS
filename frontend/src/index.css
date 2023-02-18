@@ -21,6 +21,8 @@ code {
 :root {
   --themecolor: #645cbb;
   --lightBlue: #7286d3;
+  --textcolorHome: black;
+  --homethemecolor: linear-gradient(to right, #66d3e6, #61ccea, #63c5ed, #6abdee, #75b4ed, #71b8f1, #6dbbf4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
 }
 button {
   cursor: pointer;

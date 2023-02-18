@@ -36,7 +36,7 @@ function PendingRequests() {
   return (
     <div
       className=" pb-4  xl:pb-8"
-      style={{ backgroundColor: "var(--themecolor)", minHeight: "98vh" }}
+      style={{ backgroundColor: "var(--themecolor)", minHeight: "100vh" }}
     >
       <UserNavbar></UserNavbar>
       <br></br>
@@ -121,7 +121,7 @@ function PendingRequests() {
       >
         {tablets.map((item, index) => {
           return (
-            <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
+            <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl" style={{margin:'20px'}}>
               <div className="md:flex">
                 <div className="md:shrink-0">
                   <img

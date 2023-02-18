@@ -77,7 +77,7 @@ function GetDetails() {
             style={{
               backgroundColor: 'white',
               height: '',
-              width: '60%',
+              width: '80%',
               padding: '30px',
               borderRadius: '20px',
               textAlign: 'left',

@@ -2,9 +2,6 @@ import { Avatar } from 'flowbite-react'
 import React, { useState } from 'react'
 
 function PharmacySignin() {
-  
- 
-
   return (
 
     
@@ -13,21 +10,21 @@ function PharmacySignin() {
     }}
 >
 <br></br>
-            <span className="font-semibold text-xl tracking-tight" style={{color:'black',paddingLeft:'40px',paddingTop:'20px',fontSize:'170%'}}>MEDSURPLUS</span>
+            <span className="font-semibold text-xl tracking-tight" style={{color:'black',paddingLeft:'40px',paddingTop:'20px',fontSize:'160%'}}>MEDSURPLUS</span>
 
       <div
         style={{
             display: 'flex',
             justifyContent: 'center',
-        
+           
         }}
       >
         {
-            <fieldset style={{backgroundColor: '#eeeeee', padding: '2em',paddingTop:'2%', border: '3px solid #347aeb',
-            borderradius: '50px',
+            <fieldset style={{backgroundColor: '#eeeeee', padding: '2em',paddingTop:'2%', 
+            borderRadius: '10px',
             boxshadow: '0 0 15px #000',marginTop:"5.5%",}}>
           <div className="signin">
-          <p style={{textAlign:'center', fontSize:'180%'}}>signin</p>
+          <p style={{textAlign:'center', fontSize:'180%',fontFamily:'sans-serif'}}>Sign in</p>
                <br></br>
             <form>
                
@@ -46,7 +43,7 @@ function PharmacySignin() {
     </div>
     <label for="remember" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Remember me</label>
   </div>
-  <div style={{align:'center',marginLeft:'20%'}}>
+  <div style={{align:'center',marginLeft:'auto'}}>
   <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
 </div>
 </form>

@@ -18,18 +18,18 @@ function UserSignup(){
                         width: '50%'
                        
                     }}/>
-                    <p style={{textAlign:'center',color:'whitesmoke',fontSize:'3rem'}}>WELCOME !!</p>
+                    <p style={{textAlign:'center',color:'whitesmoke',fontSize:'3rem',fontFamily:'cursive'}}>WELCOME !!</p>
                 </div>
         <div style={{
             display: 'flex',
             justifyContent: 'center',
         }}>
           {
-             <fieldset style={{backgroundColor: '#eeeeee', padding: '3em',paddingTop:'2%', border: '3px solid #347aeb',
+             <fieldset style={{backgroundColor: '#eeeeee', padding: '3em',paddingTop:'2%', borderRadius:'10px',
              borderradius: '10px',
              boxshadow: 'rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px',}}>
              <div className="signup" >
-             <p style={{textAlign:'center', fontSize:'180%'}}>Signup</p>
+             <p style={{textAlign:'center', fontSize:'180%',paddingTop:'2%',fontFamily:'sans-serif'}}>Sign up</p>
                <br></br>
                <form>
                

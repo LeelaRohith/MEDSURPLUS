@@ -41,7 +41,7 @@ function AcceptedRequests() {
               justifyContent: "flex-start",
             }}
           >
-            <p style={{ paddingLeft: "12px", fontSize: "30px" }}>Poornesh</p>
+            <p style={{ paddingLeft: "12px", fontSize: "20px",marginTop:'5px' }}>Poornesh</p>
             <div
               style={{
                 display: "flex",
@@ -50,14 +50,14 @@ function AcceptedRequests() {
               }}
               className="lg:justify-around"
             >
-              <div style={{ paddingLeft: "20px" }}>
-                <p style={{ whiteSpace: "nowrap" }}>Reward :dzthsdth </p>
+              <div style={{ paddingLeft: "8px" }}>
+                <p style={{ paddingLeft: "2px", fontSize: "15px" }}>Reward :dzthsdth </p>
               </div>
 
               <div style={{}}>
-                <p>Code : drhdraETGwetg</p>
+                <p style={{ paddingLeft: "10px", fontSize: "15px" }} >Code : drhdraETGwetg</p>
               </div>
-              <div style={{ paddingBottom: "12px" }}>
+              <div style={{ paddingBottom: "12px",paddingLeft:'10px' }}>
                 <Button
                   style={{
                     backgroundColor: "var(--lightBlue)",

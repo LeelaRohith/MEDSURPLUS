@@ -24,6 +24,7 @@ function Maps() {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
+            backgroundImage:'var(--homethemecolor)'
           }}
         >
           <Map
@@ -35,7 +36,8 @@ function Maps() {
             }}
             style={{
               width: '80vw',
-              height: '80vh',
+              height: '100vh',
+              marginTop:'2.3rem'
             }}
             mapStyle="mapbox://styles/mapbox/streets-v12"
           >
