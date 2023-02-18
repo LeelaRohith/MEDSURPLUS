@@ -1,77 +1,92 @@
-import { Button } from "flowbite-react";
-import UserNavbar from "./Navbar";
-function AcceptedRequests() {
-  const rewarddetails = [
-    { username: "Rohith", text: "Get 50 % Off", code: "" },
-  ];
-  return (
-    <div>
-      <div>
-        <UserNavbar></UserNavbar>
-      </div>
-      <div style={{ backgroundColor: "var(--themecolor)", minHeight: "92vh" }}>
-        <p
-          style={{
-            textAlign: "left",
-            color: "white",
-            fontSize: "20px",
-            paddingTop: "20px",
-            marginLeft: "20px",
-          }}
-        >
-          Accepted Customers
-        </p>
-        <div
-          className="grid"
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "flex-start",
-            flexWrap: "wrap",
-          }}
-        >
-          <div
-            style={{
-              backgroundColor: "white",
-              width: "100%",
-              margin: "34px",
-              borderRadius: "5px",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "flex-start",
-            }}
-          >
-            <p style={{ paddingLeft: "12px", fontSize: "20px",marginTop:'5px' }}>Poornesh</p>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                flexWrap: "wrap",
-              }}
-              className="lg:justify-around"
-            >
-              <div style={{ paddingLeft: "8px" }}>
-                <p style={{ paddingLeft: "2px", fontSize: "15px" }}>Reward :dzthsdth </p>
-              </div>
+import { Button } from 'flowbite-react'
+import React, { useEffect, useState } from 'react'
+import UserNavbar from './Navbar'
+import { Axios } from '../../utils/Axios'
 
-              <div style={{}}>
-                <p style={{ paddingLeft: "10px", fontSize: "15px" }} >Code : drhdraETGwetg</p>
+function AcceptedRequests() {
+  const [acceptedRequests, setacceptedRequests] = useState()
+  useEffect(() => {
+    async function getacceptedRequests() {
+      const res = await Axios.get('/acceptedRequests')
+      setacceptedRequests(res.data)
+      console.log(res.data)
+    }
+    getacceptedRequests()
+  }, [])
+  const handleDeliver = async (orderId) => {
+    const res = await Axios.patch('/pharmacy/delivered', { orderId })
+    window.location.reload(false)
+    console.log(res)
+  }
+  return (
+    <div
+      className=" pb-4  xl:pb-8"
+      style={{ backgroundColor: 'var(--themecolor)', minHeight: '100vh' }}
+    >
+      <UserNavbar />
+      <br></br>
+
+      <br></br>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-around',
+          paddind: '0px',
+          flexWrap: 'wrap',
+        }}
+        //className="grid grid-cols-3 md:grid-cols-2 sm:grid-cols-1"
+      >
+        {acceptedRequests &&
+          acceptedRequests.map((item, index) => {
+            return (
+              <div
+                className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl"
+                style={{ margin: '20px' }}
+              >
+                <div className="md:flex">
+                  <div className="md:shrink-0">
+                    <img
+                      className="h-48 w-full object-cover md:h-full md:w-48"
+                      src={`data:image/png;base64,${item.image}`}
+                      alt="Modern building architecture"
+                    />
+                  </div>
+                  <div className="p-8">
+                    <p className="mt-2 text-slate-500">
+                      Name :{item.userId.username}
+                    </p>
+                    <p className="mt-2 text-slate-500">Order id :{item._id}</p>
+                    <p className="mt-2 text-slate-500">Name :{item.name}</p>
+                    <p className="mt-2 text-slate-500">
+                      Quantity :{item.quantity}
+                    </p>
+                    <p className="mt-2 text-slate-500">Expiry :{item.expiry}</p>
+                    <br></br>
+                    <hr></hr>
+                    <Button
+                      className="shadow-lg shadow-indigo-500/40 ... "
+                      style={{
+                        backgroundColor: 'var(--lightBlue)',
+                        height: '35px',
+                        textAlign: 'center',
+                        color: 'white',
+                        padding: '5px',
+                      }}
+                      onClick={(e) => {
+                        e.preventDefault()
+                        handleDeliver(item._id)
+                      }}
+                    >
+                      customer delivered
+                    </Button>
+                  </div>
+                </div>
               </div>
-              <div style={{ paddingBottom: "12px",paddingLeft:'10px' }}>
-                <Button
-                  style={{
-                    backgroundColor: "var(--lightBlue)",
-                    height: "30px",
-                  }}
-                >
-                  Claimed
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
+            )
+          })}
       </div>
     </div>
-  );
+  )
 }
-export default AcceptedRequests;
+export default AcceptedRequests
