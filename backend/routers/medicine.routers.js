@@ -3,8 +3,21 @@ import fs from 'fs'
 import xlsx from 'xlsx'
 import { Medicine } from '../models/medicines.schema.js'
 import { upload } from '../middlewares/multer.js'
+import { ChatGPTAPI } from 'chatgpt'
+
+const api = new ChatGPTAPI({
+  apiKey: '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',
+})
 
 const router = express.Router()
+
+router.post('/chatgpt', async (req, res) => {
+  const query =
+    'For what disease the medicine ' + req.body.medicineName + ' is used'
+  const resp = await api.sendMessage(query)
+  res.status(200).send(resp.text)
+})
+
 router.post(
   '/medicine/excelUpload',
   upload.single('file'),
@@ -63,4 +76,5 @@ router.post('/medicineDetails', async (req, res) => {
     res.status(500).send({ message: 'Internal server error' })
   }
 })
+
 export const MedicineRouters = router

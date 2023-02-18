@@ -9,7 +9,6 @@ import { rewardRouters } from './routers/rewards.routers.js'
 import { MedicineRouters } from './routers/medicine.routers.js'
 
 const app = express()
-
 app.use(express.json())
 
 app.use(cors())

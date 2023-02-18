@@ -25,13 +25,10 @@ function App() {
       <Route path="/user/Getdetails" element={<GetDetails />} />
       <Route path="/user/Rewards" element={<Rewards></Rewards>} />
       <Route path="/user/Nearbypharmacies" element={<Maps />} />
-      <Route
-        path="/pharmacy/pending_requests"
-        element={<PendingRequests></PendingRequests>}
-      />
+      <Route path="/pharmacy/pending_requests" element={<PendingRequests />} />
       <Route
         path="/pharmacy/accepted_customers"
-        element={<AcceptedRequests></AcceptedRequests>}
+        element={<AcceptedRequests />}
       />
     </Routes>
   )
