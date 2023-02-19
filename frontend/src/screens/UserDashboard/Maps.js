@@ -6,6 +6,11 @@ import 'mapbox-gl/dist/mapbox-gl.css'
 import UserNavbar from './Navbar'
 import { Axios } from '../../utils/Axios'
 import { useSnackbar } from 'notistack'
+import mapboxgl from 'mapbox-gl'
+
+mapboxgl.workerClass =
+  // eslint-disable-next-line import/no-webpack-loader-syntax, import/no-unresolved
+  require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default
 
 function Maps() {
   const [userCoordinates, setuserCoordinates] = useState()
@@ -87,7 +92,7 @@ function Maps() {
                   height: '87.5vh',
                   margin: '1rem 0',
                 }}
-                mapStyle="mapbox://styles/mapbox/streets-v9"
+                mapStyle="mapbox://styles/mapbox/streets-v12"
               >
                 {pharmacyCoordinates &&
                   pharmacyCoordinates.map((coords, idx) => {

@@ -46,16 +46,18 @@ function GetDetails() {
             backgroundColor: 'var(--themecolor)',
           }}
         >
-          <input
-            style={{
-              borderRadius: '4px',
-              marginRight: '10px',
-              width: '25%',
-            }}
-            type="text"
-            placeholder="Enter name of the tablet"
-            onChange={(e) => setmedicineName(e.target.value)}
-          ></input>
+          <span style={{}}>
+            <input
+              style={{
+                borderRadius: '4px',
+                marginRight: '10px',
+                width: '300px',
+              }}
+              type="text"
+              placeholder="Enter name of the tablet"
+              onChange={(e) => setmedicineName(e.target.value)}
+            ></input>
+          </span>
 
           <div>
             <Button
@@ -123,8 +125,8 @@ function GetDetails() {
                   style={{
                     backgroundColor: 'white',
                     height: '',
-                    width: '50%',
-                    padding: '50px',
+                    width: '24rem',
+                    padding: '30px',
                     borderRadius: '20px',
                     textAlign: 'left',
                     fontSize: '22px',

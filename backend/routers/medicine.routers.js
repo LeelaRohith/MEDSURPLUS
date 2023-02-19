@@ -4,11 +4,14 @@ import xlsx from 'xlsx'
 import { Medicine } from '../models/medicines.schema.js'
 import { upload } from '../middlewares/multer.js'
 import { ChatGPTAPI } from 'chatgpt'
+import dotenv from 'dotenv'
+dotenv.config()
 
 let api
 try {
+  // console.log(process.env.OPENAI_API_KEY)
   api = new ChatGPTAPI({
-    apiKey: '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',
+    apiKey: process.env.OPENAI_API_KEY,
   })
 } catch (err) {
   console.log(err)
