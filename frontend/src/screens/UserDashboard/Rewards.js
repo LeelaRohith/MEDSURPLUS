@@ -9,8 +9,12 @@ function Rewards() {
   const [rewards, setrewards] = useState()
   useEffect(() => {
     async function getRewards() {
-      const res = await Axios.get('/rewards')
-      setrewards(res.data)
+      try {
+        const res = await Axios.get('/rewards')
+        setrewards(res.data)
+      } catch (err) {
+        console.log(err.response.data.message)
+      }
     }
     getRewards()
   }, [])

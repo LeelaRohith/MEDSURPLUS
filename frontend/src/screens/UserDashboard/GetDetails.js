@@ -8,8 +8,12 @@ function GetDetails() {
   const [medicineName, setmedicineName] = useState()
   const [response, setresponse] = useState()
   const getUsage = async () => {
-    const res = await Axios.post('/chatgpt', { medicineName })
-    setresponse(res.data)
+    try {
+      const res = await Axios.post('/chatgpt', { medicineName })
+      setresponse(res.data)
+    } catch (err) {
+      console.log(err.response.data.message)
+    }
   }
   return (
     <div>

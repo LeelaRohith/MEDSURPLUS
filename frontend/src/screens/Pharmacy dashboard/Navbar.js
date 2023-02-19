@@ -1,8 +1,8 @@
-import { Dropdown, Navbar, Avatar } from "flowbite-react";
-import { useNavigate } from "react-router-dom";
+import { Dropdown, Navbar, Avatar } from 'flowbite-react'
+import { useNavigate } from 'react-router-dom'
 
 function UserNavbar() {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   return (
     <Navbar fluid={true} rounded={true}>
       <Navbar.Brand href="https://flowbite.com/">
@@ -41,19 +41,25 @@ function UserNavbar() {
       <Navbar.Collapse>
         <Navbar.Link
           className="cursor-pointer"
-          onClick={() => navigate("/pharmacy/pending_requests")}
+          onClick={() => navigate('/pharmacy/pending_requests')}
         >
           Pending Requests
         </Navbar.Link>
         <Navbar.Link
-          onClick={() => navigate("/pharmacy/accepted_customers")}
+          onClick={() => navigate('/pharmacy/accepted_customers')}
           className="cursor-pointer"
         >
           Accepted Customers
         </Navbar.Link>
+        <Navbar.Link
+          onClick={() => navigate('/pharmacy/claimReward')}
+          className="cursor-pointer"
+        >
+          Claim Reward
+        </Navbar.Link>
       </Navbar.Collapse>
     </Navbar>
-  );
+  )
 }
 
-export default UserNavbar;
+export default UserNavbar

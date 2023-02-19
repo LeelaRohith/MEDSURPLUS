@@ -8,6 +8,7 @@ import { Axios } from '../../utils/Axios'
 
 function Maps() {
   const [userCoordinates, setuserCoordinates] = useState()
+  const [pharmacyCoordinates, setpharmacyCoordinates] = useState()
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(function (position) {
       setuserCoordinates({
@@ -15,15 +16,13 @@ function Maps() {
         long: position.coords.longitude,
       })
     })
-  }, [])
-  const [pharmacyCoordinates, setpharmacyCoordinates] = useState()
-  useEffect(() => {
     async function getCoords() {
       const res = await Axios.get('/pharmaciesCoordinates')
       setpharmacyCoordinates(res.data)
     }
     getCoords()
   }, [])
+
   console.log(pharmacyCoordinates)
   return (
     <>

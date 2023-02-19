@@ -13,10 +13,27 @@ router.get('/rewards', authorizeUser, async (req, res) => {
   }
 })
 
+router.post('/searchReward', authorizeUser, async (req, res) => {
+  try {
+    const { code } = req.body
+    if (!code) {
+      return res.status(402).send({ message: 'code required' })
+    }
+    const found = await Reward.findOne({ _id: req.body.code }).populate(
+      'userId'
+    )
+    if (!found) {
+      return res.status(403).send({ message: 'coupon not found' })
+    }
+    return res.status(200).send(found)
+  } catch (err) {
+    return res.status(500).send({ message: 'Internal server error', err })
+  }
+})
 router.post('/claimReward', authorizeUser, async (req, res) => {
   try {
     const claimedReward = await Reward.findOneAndDelete({ _id: req.body.code })
-   // console.log(claimedReward)
+    // console.log(claimedReward)
     if (!claimedReward) {
       return res.status(401).send({ message: 'Invalid coupon code' })
     }

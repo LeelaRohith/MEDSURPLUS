@@ -7,60 +7,64 @@ import {
   Modal,
   Select,
   TextInput,
-} from "flowbite-react";
-import React, { useEffect, useState } from "react";
-import UserNavbar from "./Navbar";
-import { Axios } from "../../utils/Axios";
+} from 'flowbite-react'
+import React, { useEffect, useState } from 'react'
+import UserNavbar from './Navbar'
+import { Axios } from '../../utils/Axios'
 
-import PendingIcon from "@mui/icons-material/Pending";
-import HourglassTopIcon from "@mui/icons-material/HourglassTop";
+import PendingIcon from '@mui/icons-material/Pending'
+import HourglassTopIcon from '@mui/icons-material/HourglassTop'
 
 function Requests() {
   const [sellingDetails, setsellingDetails] = useState({
-    name: "",
+    name: '',
     file: null,
     quantity: NaN,
-    expiry: "expired",
-  });
-  const [requests, setrequests] = useState();
+    expiry: 'expired',
+  })
+  const [requests, setrequests] = useState()
 
-  const [modal, setmodal] = useState(false);
+  const [modal, setmodal] = useState(false)
   const handleSellCick = async () => {
     try {
-      const formData = new FormData();
-      formData.append("name", sellingDetails.name);
-      formData.append("file", sellingDetails.file);
-      formData.append("quantity", sellingDetails.quantity);
-      formData.append("expiry", sellingDetails.expiry);
-      const res = await Axios.post("/sell", formData, {
-        "Content-Type": "multipart/form-data",
-      });
+      const formData = new FormData()
+      formData.append('name', sellingDetails.name)
+      formData.append('file', sellingDetails.file)
+      formData.append('quantity', sellingDetails.quantity)
+      formData.append('expiry', sellingDetails.expiry)
+      const res = await Axios.post('/sell', formData, {
+        'Content-Type': 'multipart/form-data',
+      })
       if (res) {
-        console.log(res.data.message);
+        console.log(res.data.message)
       }
     } catch (err) {
-      console.log(err.response.data.message);
+      console.log(err.response.data.message)
     }
     setsellingDetails({
-      name: "",
+      name: '',
       file: null,
       quantity: NaN,
-      expiry: "expired",
-    });
-    setmodal(false);
-  };
+      expiry: 'expired',
+    })
+    setmodal(false)
+  }
   useEffect(() => {
     async function getRequests() {
-      const res = await Axios.get("/requests");
-      console.log(res);
-      setrequests(res.data);
+      try {
+        const res = await Axios.get('/requests')
+        console.log(res)
+        setrequests(res.data)
+      } catch (err) {
+        console.log(err.response.data.message)
+      }
     }
-    getRequests();
-  }, []);
+    getRequests()
+  }, [])
   return (
     <div
       className=" pb-4  xl:pb-8"
-      style={{ backgroundColor: "var(--themecolor)", minHeight: "98vh" }}
+      style={{ backgroundColor: 'var(--themecolor)', minHeight: '98vh' }}
     >
       <UserNavbar></UserNavbar>
       <br></br>
@@ -71,9 +75,9 @@ function Requests() {
         <React.Fragment>
           <Button
             onClick={() => {
-              setmodal(true);
+              setmodal(true)
             }}
-            style={{ backgroundColor: "var(--lightBlue)" }}
+            style={{ backgroundColor: 'var(--lightBlue)' }}
           >
             Sell Tablets
           </Button>
@@ -82,11 +86,11 @@ function Requests() {
             size="md"
             popup={true}
             onClose={() => {
-              setmodal(false);
+              setmodal(false)
             }}
           >
             <Modal.Header />
-            <Modal.Body style={{ width: "100%" }}>
+            <Modal.Body style={{ width: '100%' }}>
               <div className="space-y-6 px-6 pb-4 sm:pb-6 lg:px-16 xl:pb-8">
                 <h3 className="text-xl font-medium text-gray-900 dark:text-white">
                   Enter the medicine details
@@ -178,8 +182,8 @@ function Requests() {
                 <div className="w-full">
                   <Button
                     onClick={(e) => {
-                      e.preventDefault();
-                      handleSellCick();
+                      e.preventDefault()
+                      handleSellCick()
                     }}
                   >
                     Send Request
@@ -194,11 +198,11 @@ function Requests() {
       {requests && requests.length !== 0 ? (
         <div
           style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-around",
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-around',
             //  padding: '28px',
-            flexWrap: "wrap",
+            flexWrap: 'wrap',
           }}
           //className="grid grid-cols-3 md:grid-cols-2 sm:grid-cols-1"
         >
@@ -208,27 +212,27 @@ function Requests() {
                 <div
                   className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-lg"
                   style={{
-                    maxWidth: "500px",
-                    margin: "40px",
-                    height: "fit-content",
+                    maxWidth: '500px',
+                    margin: '40px',
+                    height: 'fit-content',
                   }}
                 >
                   <div className="md:flex">
                     <div className="md:shrink-0">
                       <img
                         style={{
-                          height: "100%",
-                          objectFit: "cover",
+                          height: '100%',
+                          objectFit: 'cover',
                         }}
                         className="h-48 w-full object-cover md:h-full md:w-48"
                         src={`data:image/png;base64,${item.image}`}
                         alt="Modern building architecture"
                       />
                     </div>
-                    <div style={{ padding: "6px 18px" }}>
+                    <div style={{ padding: '6px 18px' }}>
                       <p
                         className="mt-2 text-slate-500"
-                        style={{ paddingTop: "5%" }}
+                        style={{ paddingTop: '5%' }}
                       >
                         Order id :{item._id}
                       </p>
@@ -237,34 +241,34 @@ function Requests() {
                       <p className="mt-2 ">{item.expiry}</p>
                       <br></br>
                       <hr></hr>
-                      {item.status === "pending" ? (
+                      {item.status === 'pending' ? (
                         <div
                           style={{
-                            display: "flex",
-                            alignItems: "center",
-                            flexDirection: "column",
+                            display: 'flex',
+                            alignItems: 'center',
+                            flexDirection: 'column',
                           }}
                         >
                           <div
-                            style={{ marginTop: "20px", marginBottom: "20px" }}
+                            style={{ marginTop: '20px', marginBottom: '20px' }}
                           >
                             <p
                               className="mt-2 text-slate-500"
-                              style={{ paddingTop: "7%" }}
+                              style={{ paddingTop: '7%' }}
                             >
                               Awaiting for pharmacy to accept the request
                             </p>
                           </div>
                           <div
                             style={{
-                              width: "fit-content",
-                              backgroundColor: "var(--lightBlue)",
-                              height: "35px",
-                              textAlign: "center",
-                              color: "white",
-                              padding: "5px 10px",
-                              borderRadius: "50px",
-                              marginBottom: "10px",
+                              width: 'fit-content',
+                              backgroundColor: 'var(--lightBlue)',
+                              height: '35px',
+                              textAlign: 'center',
+                              color: 'white',
+                              padding: '5px 10px',
+                              borderRadius: '50px',
+                              marginBottom: '10px',
                             }}
                           >
                             <PendingIcon /> Request Sent
@@ -287,9 +291,9 @@ function Requests() {
                           <br></br>
                           <div
                             style={{
-                              display: "flex",
-                              alignItems: "center",
-                              flexDirection: "column",
+                              display: 'flex',
+                              alignItems: 'center',
+                              flexDirection: 'column',
                             }}
                           >
                             <div className="text-slate-500 pb-2">
@@ -298,14 +302,14 @@ function Requests() {
                             <div
                               //className="shadow-lg shadow-indigo-500/40 ..."
                               style={{
-                                width: "fit-content",
-                                backgroundColor: "green",
-                                height: "35px",
-                                textAlign: "center",
-                                color: "white",
-                                padding: "5px 16px",
-                                borderRadius: "50px",
-                                marginBottom: "10px",
+                                width: 'fit-content',
+                                backgroundColor: 'green',
+                                height: '35px',
+                                textAlign: 'center',
+                                color: 'white',
+                                padding: '5px 16px',
+                                borderRadius: '50px',
+                                marginBottom: '10px',
                               }}
                             >
                               <span>
@@ -318,7 +322,7 @@ function Requests() {
                     </div>
                   </div>
                 </div>
-              );
+              )
             })}
         </div>
       ) : (
@@ -326,17 +330,17 @@ function Requests() {
           className="grid"
           style={{
             //maxWidth: "500px",
-            margin: "40px",
-            height: "fit-content",
-            textAlign: "Center",
+            margin: '40px',
+            height: 'fit-content',
+            textAlign: 'Center',
           }}
         >
-          <p style={{ color: "white", fontWeight: "bold", fontSize: "40px" }}>
+          <p style={{ color: 'white', fontWeight: 'bold', fontSize: '40px' }}>
             There are no current requests. Click one sell tablets to start.
           </p>
         </div>
       )}
     </div>
-  );
+  )
 }
-export default Requests;
+export default Requests

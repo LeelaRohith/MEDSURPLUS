@@ -10,6 +10,7 @@ import UserSignup from './screens/UserSignup'
 import Maps from './screens/UserDashboard/Maps'
 import PendingRequests from './screens/Pharmacy dashboard/Pendingrequests'
 import AcceptedRequests from './screens/Pharmacy dashboard/Acceptedrequests'
+import ClaimReward from './screens/Pharmacy dashboard/ClaimReward'
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         path="/pharmacy/accepted_customers"
         element={<AcceptedRequests />}
       />
+      <Route path="/pharmacy/claimReward" element={<ClaimReward />} />
     </Routes>
   )
 }

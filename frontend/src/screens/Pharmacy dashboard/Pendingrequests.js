@@ -7,16 +7,24 @@ function PendingRequests() {
   const [pendingRequests, setpendingRequests] = useState()
   useEffect(() => {
     async function getPendingRequests() {
-      const res = await Axios.get('/pendingRequests')
-      setpendingRequests(res.data)
-      console.log(res.data)
+      try {
+        const res = await Axios.get('/pendingRequests')
+        setpendingRequests(res.data)
+        console.log(res.data)
+      } catch (err) {
+        console.log(err.response.data.message)
+      }
     }
     getPendingRequests()
   }, [])
   const handleAccept = async (orderId) => {
-    const res = await Axios.patch('/pharmacy/accept', { orderId })
+    try {
+      const res = await Axios.patch('/pharmacy/accept', { orderId })
+      console.log(res)
+    } catch (err) {
+      console.log(err.response.data.message)
+    }
     window.location.reload(false)
-    console.log(res)
   }
   return (
     <div

@@ -7,9 +7,13 @@ function AcceptedRequests() {
   const [acceptedRequests, setacceptedRequests] = useState()
   useEffect(() => {
     async function getacceptedRequests() {
-      const res = await Axios.get('/acceptedRequests')
-      setacceptedRequests(res.data)
-      console.log(res.data)
+      try {
+        const res = await Axios.get('/acceptedRequests')
+        setacceptedRequests(res.data)
+        console.log(res.data)
+      } catch (err) {
+        console.log(err.response.data.message)
+      }
     }
     getacceptedRequests()
   }, [])
