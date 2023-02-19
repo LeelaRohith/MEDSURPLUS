@@ -83,7 +83,7 @@ function GetDetails() {
             textAlign: 'center',
             display: 'flex',
             flexDirection: 'column',
-            justifyContent: '',
+            justifyContent: 'center',
             alignItems: 'center',
             padding: '20px 0',
           }}
@@ -127,11 +127,12 @@ function GetDetails() {
                     padding: '50px',
                     borderRadius: '20px',
                     textAlign: 'left',
-                    fontSize: '20px',
+                    fontSize: '22px',
                     boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px',
+                    margin: '0 auto',
                   }}
                 >
-                  sda {response}
+                  {response}
                 </div>
               ) : (
                 <div style={{ color: 'white', fontSize: '42px' }}>

@@ -27,7 +27,7 @@ function Rewards() {
       <div>
         <UserNavbar />
       </div>
-      <div style={{ backgroundColor: 'var(--themecolor)', minHeight: '81vh' }}>
+      <div style={{ backgroundColor: 'var(--themecolor)', minHeight: '92vh' }}>
         <p
           style={{
             textAlign: 'left',
@@ -87,13 +87,13 @@ function Rewards() {
                       width: '16rem',
                       height: '16.8rem',
                       margin: '34px',
-                      borderRadius: '20px',
+                      borderRadius: '8px',
                       display: 'flex',
                       flexDirection: 'column',
                       justifyContent: 'flex-start',
                       //   padding: '8px',
                       boxShadow: 'rgba(0, 0, 0, 0.1) 0px 4px 12px',
-                      border: '1px solid blue',
+                      border: '3px dotted black',
                     }}
                   >
                     <div>

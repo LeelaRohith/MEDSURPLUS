@@ -5,9 +5,14 @@ import { Medicine } from '../models/medicines.schema.js'
 import { upload } from '../middlewares/multer.js'
 import { ChatGPTAPI } from 'chatgpt'
 
-const api = new ChatGPTAPI({
-  apiKey: process.env.CHATGPT_APIKEY,
-})
+let api
+try {
+  api = new ChatGPTAPI({
+    apiKey: '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',
+  })
+} catch (err) {
+  console.log(err)
+}
 
 const router = express.Router()
 
