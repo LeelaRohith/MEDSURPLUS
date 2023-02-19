@@ -1,35 +1,42 @@
-import { Button } from 'flowbite-react'
-import React, { useEffect, useState } from 'react'
-import UserNavbar from './Navbar'
-import { Axios } from '../../utils/Axios'
+import { Button } from "flowbite-react";
+import React, { useEffect, useState } from "react";
+import UserNavbar from "./Navbar";
+import { Axios } from "../../utils/Axios";
+import { useSnackbar } from "notistack";
 
 function PendingRequests() {
-  const [pendingRequests, setpendingRequests] = useState()
+  const { enqueueSnackbar } = useSnackbar();
+  const [pendingRequests, setpendingRequests] = useState();
   useEffect(() => {
     async function getPendingRequests() {
       try {
-        const res = await Axios.get('/pendingRequests')
-        setpendingRequests(res.data)
-        console.log(res.data)
+        const res = await Axios.get("/pendingRequests");
+        setpendingRequests(res.data);
+        console.log(res.data);
+        enqueueSnackbar(res.data.message, {
+          variant: "success",
+          autoHideDuration: 1000,
+        });
       } catch (err) {
-        console.log(err.response.data.message)
+        console.log(err.response.data.message);
+        enqueueSnackbar(err.response.data.message, { variant: "error" });
       }
     }
-    getPendingRequests()
-  }, [])
+    getPendingRequests();
+  }, []);
   const handleAccept = async (orderId) => {
     try {
-      const res = await Axios.patch('/pharmacy/accept', { orderId })
-      console.log(res)
+      const res = await Axios.patch("/pharmacy/accept", { orderId });
+      console.log(res);
     } catch (err) {
-      console.log(err.response.data.message)
+      console.log(err.response.data.message);
     }
-    window.location.reload(false)
-  }
+    window.location.reload(false);
+  };
   return (
     <div
       className=" pb-4  xl:pb-8"
-      style={{ backgroundColor: 'var(--themecolor)', minHeight: '100vh' }}
+      style={{ backgroundColor: "var(--themecolor)", minHeight: "100vh" }}
     >
       <UserNavbar></UserNavbar>
       <br></br>
@@ -104,20 +111,20 @@ function PendingRequests() {
       <br></br>
       <div
         style={{
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-around',
-          paddind: '0px',
-          flexWrap: 'wrap',
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-around",
+          paddind: "0px",
+          flexWrap: "wrap",
         }}
         //className="grid grid-cols-3 md:grid-cols-2 sm:grid-cols-1"
       >
-        {pendingRequests &&
+        {/* {pendingRequests &&
           pendingRequests.map((item, index) => {
             return (
               <div
                 className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl"
-                style={{ margin: '20px' }}
+                style={{ margin: "20px" }}
               >
                 <div className="md:flex">
                   <div className="md:shrink-0">
@@ -142,26 +149,105 @@ function PendingRequests() {
                     <Button
                       className="shadow-lg shadow-indigo-500/40 ... "
                       style={{
-                        backgroundColor: 'var(--lightBlue)',
-                        height: '35px',
-                        textAlign: 'center',
-                        color: 'white',
-                        padding: '5px',
+                        backgroundColor: "var(--lightBlue)",
+                        height: "35px",
+                        textAlign: "center",
+                        color: "white",
+                        padding: "5px",
                       }}
                       onClick={(e) => {
-                        e.preventDefault()
-                        handleAccept(item._id)
+                        e.preventDefault();
+                        handleAccept(item._id);
                       }}
                     >
-                      Accept Request{' '}
+                      Accept Request{" "}
                     </Button>
                   </div>
                 </div>
               </div>
-            )
-          })}
+            );
+          })} */}
+        {pendingRequests && pendingRequests.length !== 0 ? (
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-around",
+              //  padding: '28px',
+              flexWrap: "wrap",
+            }}
+            //className="grid grid-cols-3 md:grid-cols-2 sm:grid-cols-1"
+          >
+            {pendingRequests &&
+              pendingRequests.map((item, index) => {
+                return (
+                  <div
+                    className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl"
+                    style={{ margin: "20px" }}
+                  >
+                    <div className="md:flex">
+                      <div className="md:shrink-0">
+                        <img
+                          className="h-48 w-full object-cover md:h-full md:w-48"
+                          src={`data:image/png;base64,${item.image}`}
+                          alt="Modern building architecture"
+                        />
+                      </div>
+                      <div className="p-8">
+                        <p className="mt-2 text-slate-500">
+                          Name :{item.userId.username}
+                        </p>
+                        <p className="mt-2 text-slate-500">
+                          Order id :{item._id}
+                        </p>
+                        <p className="mt-2 text-slate-500">Name :{item.name}</p>
+                        <p className="mt-2 text-slate-500">
+                          Quantity :{item.quantity}
+                        </p>
+                        <p className="mt-2 text-slate-500">
+                          Expiry :{item.expiry}
+                        </p>
+                        <br></br>
+                        <hr></hr>
+                        <Button
+                          className="shadow-lg shadow-indigo-500/40 ... "
+                          style={{
+                            backgroundColor: "var(--lightBlue)",
+                            height: "35px",
+                            textAlign: "center",
+                            color: "white",
+                            padding: "5px",
+                          }}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            handleAccept(item._id);
+                          }}
+                        >
+                          Accept Request{" "}
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+          </div>
+        ) : (
+          <div
+            className="grid"
+            style={{
+              //maxWidth: "500px",
+              margin: "40px",
+              height: "fit-content",
+              textAlign: "Center",
+            }}
+          >
+            <p style={{ color: "white", fontWeight: "bold", fontSize: "40px" }}>
+              There are no pending requests right now.
+            </p>
+          </div>
+        )}
       </div>
     </div>
-  )
+  );
 }
-export default PendingRequests
+export default PendingRequests;

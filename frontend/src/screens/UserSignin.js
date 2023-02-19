@@ -2,8 +2,9 @@ import { Avatar } from "flowbite-react";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Axios } from "../utils/Axios";
-
+import { useSnackbar } from "notistack";
 function UserSignin() {
+  const { enqueueSnackbar } = useSnackbar();
   const [userDetails, setuserDetails] = useState({
     email: "",
     password: "",
@@ -16,12 +17,17 @@ function UserSignin() {
 
       if (res) {
         localStorage.setItem("jwtKey", res.data.jwtToken);
+        enqueueSnackbar(res.data.message, {
+          variant: "success",
+          autoHideDuration: 1000,
+        });
         console.log(res.data.message);
 
         navigate("/user/Requests");
       }
     } catch (err) {
       console.log(err.response.data.message);
+      enqueueSnackbar(err.response.data.message, { variant: "error" });
     }
   };
 

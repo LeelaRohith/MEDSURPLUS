@@ -1,31 +1,38 @@
-import { Button } from 'flowbite-react'
-import React, { useEffect, useState } from 'react'
-import UserNavbar from './Navbar'
-import { Axios } from '../../utils/Axios'
+import { Button } from "flowbite-react";
+import React, { useEffect, useState } from "react";
+import UserNavbar from "./Navbar";
+import { Axios } from "../../utils/Axios";
+import { useSnackbar } from "notistack";
 
 function AcceptedRequests() {
-  const [acceptedRequests, setacceptedRequests] = useState()
+  const { enqueueSnackbar } = useSnackbar();
+  const [acceptedRequests, setacceptedRequests] = useState();
   useEffect(() => {
     async function getacceptedRequests() {
       try {
-        const res = await Axios.get('/acceptedRequests')
-        setacceptedRequests(res.data)
-        console.log(res.data)
+        const res = await Axios.get("/acceptedRequests");
+        setacceptedRequests(res.data);
+        console.log(res.data);
+        enqueueSnackbar(res.data, {
+          variant: "success",
+          autoHideDuration: 1000,
+        });
       } catch (err) {
-        console.log(err.response.data.message)
+        console.log(err.response.data.message);
+        enqueueSnackbar(err.response.data.message, { variant: "error" });
       }
     }
-    getacceptedRequests()
-  }, [])
+    getacceptedRequests();
+  }, []);
   const handleDeliver = async (orderId) => {
-    const res = await Axios.patch('/pharmacy/delivered', { orderId })
-    window.location.reload(false)
-    console.log(res)
-  }
+    const res = await Axios.patch("/pharmacy/delivered", { orderId });
+    window.location.reload(false);
+    console.log(res);
+  };
   return (
     <div
       className=" pb-4  xl:pb-8"
-      style={{ backgroundColor: 'var(--themecolor)', minHeight: '100vh' }}
+      style={{ backgroundColor: "var(--themecolor)", minHeight: "100vh" }}
     >
       <UserNavbar />
       <br></br>
@@ -33,11 +40,11 @@ function AcceptedRequests() {
       <br></br>
       <div
         style={{
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-around',
-          paddind: '0px',
-          flexWrap: 'wrap',
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-around",
+          paddind: "0px",
+          flexWrap: "wrap",
         }}
         //className="grid grid-cols-3 md:grid-cols-2 sm:grid-cols-1"
       >
@@ -46,7 +53,7 @@ function AcceptedRequests() {
             return (
               <div
                 className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl"
-                style={{ margin: '20px' }}
+                style={{ margin: "20px" }}
               >
                 <div className="md:flex">
                   <div className="md:shrink-0">
@@ -71,15 +78,15 @@ function AcceptedRequests() {
                     <Button
                       className="shadow-lg shadow-indigo-500/40 ... "
                       style={{
-                        backgroundColor: 'var(--lightBlue)',
-                        height: '35px',
-                        textAlign: 'center',
-                        color: 'white',
-                        padding: '5px',
+                        backgroundColor: "var(--lightBlue)",
+                        height: "35px",
+                        textAlign: "center",
+                        color: "white",
+                        padding: "5px",
                       }}
                       onClick={(e) => {
-                        e.preventDefault()
-                        handleDeliver(item._id)
+                        e.preventDefault();
+                        handleDeliver(item._id);
                       }}
                     >
                       customer delivered
@@ -87,10 +94,10 @@ function AcceptedRequests() {
                   </div>
                 </div>
               </div>
-            )
+            );
           })}
       </div>
     </div>
-  )
+  );
 }
-export default AcceptedRequests
+export default AcceptedRequests;

@@ -1,41 +1,44 @@
-import { Button, Label, TextInput } from 'flowbite-react'
-import UserNavbar from './Navbar'
-import Divider from '@mui/material/Divider'
-import { Axios } from '../../utils/Axios'
-import { useEffect, useState } from 'react'
+import { Button, Label, TextInput } from "flowbite-react";
+import UserNavbar from "./Navbar";
+import Divider from "@mui/material/Divider";
+import { Axios } from "../../utils/Axios";
+import { useEffect, useState } from "react";
+import { useSnackbar } from "notistack";
 
 function GetDetails() {
-  const [medicineName, setmedicineName] = useState()
-  const [response, setresponse] = useState()
+  const { enqueueSnackbar } = useSnackbar();
+  const [medicineName, setmedicineName] = useState();
+  const [response, setresponse] = useState();
   const getUsage = async () => {
     try {
-      const res = await Axios.post('/chatgpt', { medicineName })
-      setresponse(res.data)
+      const res = await Axios.post("/chatgpt", { medicineName });
+      setresponse(res.data);
     } catch (err) {
-      console.log(err.response.data.message)
+      console.log(err.response.data.message);
+      enqueueSnackbar(err.response.data.message, { variant: "error" });
     }
-  }
+  };
   return (
     <div>
       <div>
         <UserNavbar></UserNavbar>
       </div>
-      <div style={{ paddingTop: '20px', backgroundColor: 'var(--themecolor)' }}>
+      <div style={{ paddingTop: "20px", backgroundColor: "var(--themecolor)" }}>
         <div
           style={{
-            display: 'flex',
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-            justifyContent: 'center',
-            alignItems: 'center',
-            padingTop: '0px',
-            backgroundColor: 'var(--themecolor)',
+            display: "flex",
+            flexDirection: "row",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            alignItems: "center",
+            padingTop: "0px",
+            backgroundColor: "var(--themecolor)",
           }}
         >
           <input
             style={{
-              borderRadius: '4px',
-              marginRight: '10px',
+              borderRadius: "4px",
+              marginRight: "10px",
             }}
             type="text"
             placeholder="Enter name of the tablet"
@@ -45,10 +48,10 @@ function GetDetails() {
           <div>
             <Button
               onClick={(e) => {
-                e.preventDefault()
-                getUsage()
+                e.preventDefault();
+                getUsage();
               }}
-              style={{ backgroundColor: 'var(--lightBlue)' }}
+              style={{ backgroundColor: "#00e8ff" }}
             >
               Get Details
             </Button>
@@ -58,25 +61,25 @@ function GetDetails() {
       <div
         className="grid"
         style={{
-          backgroundColor: 'var(--themecolor)',
-          minHeight: '83vh',
-          textAlign: 'center',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: '',
-          alignItems: 'center',
-          padding: '20px 0',
+          backgroundColor: "var(--themecolor)",
+          minHeight: "83vh",
+          textAlign: "center",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "",
+          alignItems: "center",
+          padding: "20px 0",
         }}
       >
         <br></br>
         {!response ? (
           <div
             style={{
-              fontWeight: 'bold',
-              fontSize: '40px',
-              color: 'white',
-              paddingRight: '10px',
-              paddingLeft: '10px',
+              fontWeight: "bold",
+              fontSize: "40px",
+              color: "white",
+              paddingRight: "10px",
+              paddingLeft: "10px",
             }}
           >
             Did you forget the tablet usage ? Dont Worry !
@@ -84,14 +87,14 @@ function GetDetails() {
         ) : (
           <div
             style={{
-              backgroundColor: 'white',
-              height: '',
-              width: '50%',
-              padding: '50px',
-              borderRadius: '20px',
-              textAlign: 'left',
-              fontSize: '20px',
-              boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px',
+              backgroundColor: "white",
+              height: "",
+              width: "50%",
+              padding: "50px",
+              borderRadius: "20px",
+              textAlign: "left",
+              fontSize: "20px",
+              boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
             }}
           >
             {response}
@@ -99,6 +102,6 @@ function GetDetails() {
         )}
       </div>
     </div>
-  )
+  );
 }
-export default GetDetails
+export default GetDetails;

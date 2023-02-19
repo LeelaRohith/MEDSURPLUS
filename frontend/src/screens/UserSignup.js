@@ -1,72 +1,78 @@
-import React, { useState } from 'react'
-import { Axios } from '../utils/Axios'
-import { useNavigate } from 'react-router-dom'
-
+import React, { useState } from "react";
+import { Axios } from "../utils/Axios";
+import { useNavigate } from "react-router-dom";
+import { useSnackbar } from "notistack";
 function UserSignup() {
+  const { enqueueSnackbar } = useSnackbar();
   const [userDetails, setuserDetails] = useState({
-    username: '',
-    email: '',
-    password: '',
-    contactNo: '',
-    address: '',
-    city: '',
-    state: '',
-  })
-  const navigate = useNavigate()
+    username: "",
+    email: "",
+    password: "",
+    contactNo: "",
+    address: "",
+    city: "",
+    state: "",
+  });
+  const navigate = useNavigate();
 
   const handleSubmit = async () => {
     try {
-      const res = await Axios.post('/userSignup', userDetails)
+      const res = await Axios.post("/userSignup", userDetails);
       if (res) {
-        console.log(res.data.message)
-        navigate('/userSignin')
+        console.log(res.data.message);
+        enqueueSnackbar(res.data.message, {
+          variant: "success",
+          autoHideDuration: 1000,
+        });
+        navigate("/userSignin");
       }
     } catch (err) {
-      console.log(err.response.data.message)
+      console.log(err.response.data.message);
+      enqueueSnackbar(err.response.data.message, { variant: "error" });
     }
-  }
+  };
 
   return (
     <div
       style={{
         backgroundImage:
-          'linear-gradient(to right, #66d3e6, #61ccea, #63c5ed, #6abdee, #75b4ed, #71b8f1, #6dbbf4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1)',
-        height: '100%',
+          "linear-gradient(to right, #66d3e6, #61ccea, #63c5ed, #6abdee, #75b4ed, #71b8f1, #6dbbf4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1)",
+        height: "100%",
       }}
     >
       <br></br>
       <span
         className="font-semibold text-xl tracking-tight"
         style={{
-          color: 'black',
-          paddingLeft: '40px',
-          paddingTop: '20px',
-          fontSize: '170%',
+          color: "black",
+          paddingLeft: "40px",
+          paddingTop: "20px",
+          fontSize: "170%",
         }}
       >
         MEDSURPLUS
       </span>
       <div
         className="grid gap-6 mb-6 md:grid-cols-2"
-        style={{ padding: '5%', paddingTop: '2%', marginBottom: '0%' }}
+        style={{ padding: "5%", paddingTop: "2%", marginBottom: "0%" }}
       >
         <div>
           <img
             src="static/images/Pillimage.png"
             alt=""
             style={{
-              paddingTop: '20%',
-              marginLeft: 'auto',
-              marginRight: 'auto',
-              width: '50%',
+              paddingTop: "20%",
+              marginLeft: "auto",
+              marginRight: "auto",
+              width: "50%",
             }}
           />
           <p
             style={{
-              textAlign: 'center',
-              color: 'whitesmoke',
-              fontSize: '3rem',
-              fontFamily: 'cursive',
+              textAlign: "center",
+              color: "whitesmoke",
+              fontSize: "3rem",
+              fontFamily: "cursive",
             }}
           >
             WELCOME !!
@@ -74,28 +80,28 @@ function UserSignup() {
         </div>
         <div
           style={{
-            display: 'flex',
-            justifyContent: 'center',
+            display: "flex",
+            justifyContent: "center",
           }}
         >
           {
             <fieldset
               style={{
-                backgroundColor: '#eeeeee',
-                padding: '3em',
-                paddingTop: '2%',
-                borderRadius: '10px',
+                backgroundColor: "#eeeeee",
+                padding: "3em",
+                paddingTop: "2%",
+                borderRadius: "10px",
                 boxshadow:
-                  'rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px',
+                  "rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px",
               }}
             >
               <div className="signup">
                 <p
                   style={{
-                    textAlign: 'center',
-                    fontSize: '180%',
-                    paddingTop: '2%',
-                    fontFamily: 'sans-serif',
+                    textAlign: "center",
+                    fontSize: "180%",
+                    paddingTop: "2%",
+                    fontFamily: "sans-serif",
                   }}
                 >
                   Sign up
@@ -287,7 +293,7 @@ function UserSignup() {
                       htmlFor="remember"
                       className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                     >
-                      I agree with the{' '}
+                      I agree with the{" "}
                       <a
                         href="#"
                         className="text-blue-600 hover:underline dark:text-blue-500"
@@ -297,13 +303,13 @@ function UserSignup() {
                       .
                     </label>
                   </div>
-                  <div style={{ display: 'flex', justifyContent: 'center' }}>
+                  <div style={{ display: "flex", justifyContent: "center" }}>
                     <button
                       type="submit"
                       className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                       onClick={(e) => {
-                        e.preventDefault()
-                        handleSubmit()
+                        e.preventDefault();
+                        handleSubmit();
                       }}
                     >
                       Submit
@@ -318,6 +324,6 @@ function UserSignup() {
         </div>
       </div>
     </div>
-  )
+  );
 }
-export default UserSignup
+export default UserSignup;

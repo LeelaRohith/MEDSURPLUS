@@ -1,37 +1,40 @@
-import { useEffect, useState } from 'react'
-import UserNavbar from './Navbar'
-import { Axios } from '../../utils/Axios'
+import { useEffect, useState } from "react";
+import UserNavbar from "./Navbar";
+import { Axios } from "../../utils/Axios";
+import { useSnackbar } from "notistack";
 function Rewards() {
+  const { enqueueSnackbar } = useSnackbar();
   const rewarddetails = [
-    { text: 'Get 50 % Off', code: '', shopname: '763789DFST' },
-  ]
+    { text: "Get 50 % Off", code: "", shopname: "763789DFST" },
+  ];
 
-  const [rewards, setrewards] = useState()
+  const [rewards, setrewards] = useState();
   useEffect(() => {
     async function getRewards() {
       try {
-        const res = await Axios.get('/rewards')
-        setrewards(res.data)
+        const res = await Axios.get("/rewards");
+        setrewards(res.data);
       } catch (err) {
-        console.log(err.response.data.message)
+        console.log(err.response.data.message);
+        enqueueSnackbar(err.response.data.message, { variant: "error" });
       }
     }
-    getRewards()
-  }, [])
+    getRewards();
+  }, []);
 
   return (
     <div>
       <div>
         <UserNavbar />
       </div>
-      <div style={{ backgroundColor: 'var(--themecolor)', minHeight: '81vh' }}>
+      <div style={{ backgroundColor: "var(--themecolor)", minHeight: "81vh" }}>
         <p
           style={{
-            textAlign: 'left',
-            color: 'white',
-            fontSize: '20px',
-            paddingTop: '20px',
-            marginLeft: '20px',
+            textAlign: "left",
+            color: "white",
+            fontSize: "20px",
+            paddingTop: "20px",
+            marginLeft: "20px",
           }}
         >
           Discounts
@@ -39,11 +42,11 @@ function Rewards() {
         <div
           className="grid"
           style={{
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'flex-start',
-            flexWrap: 'wrap',
-            minHeight: '88vh',
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "flex-start",
+            flexWrap: "wrap",
+            minHeight: "88vh",
           }}
         >
           {rewards &&
@@ -51,14 +54,14 @@ function Rewards() {
               return (
                 <div
                   style={{
-                    backgroundColor: 'white',
-                    height: '300px',
-                    width: '280px',
-                    margin: '34px',
-                    borderRadius: '20px',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'flex-start',
+                    backgroundColor: "white",
+                    height: "300px",
+                    width: "280px",
+                    margin: "34px",
+                    borderRadius: "20px",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "flex-start",
                   }}
                 >
                   <div>
@@ -67,23 +70,23 @@ function Rewards() {
                       width="250px"
                       height="80px"
                       style={{
-                        marginLeft: '20px',
-                        paddingTop: '5px',
+                        marginLeft: "20px",
+                        paddingTop: "5px",
                       }}
                       alt=""
                     ></img>
                   </div>
-                  <div style={{ textAlign: 'center', marginTop: '10px' }}>
+                  <div style={{ textAlign: "center", marginTop: "10px" }}>
                     {item.reward}
-                    <br></br> Code : {item.orderId} <br></br> Medical Shop :{' '}
+                    <br></br> Code : {item.orderId} <br></br> Medical Shop :{" "}
                     {item.organisation}
                   </div>
                 </div>
-              )
+              );
             })}
         </div>
       </div>
     </div>
-  )
+  );
 }
-export default Rewards
+export default Rewards;
