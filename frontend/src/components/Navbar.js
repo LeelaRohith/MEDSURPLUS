@@ -14,7 +14,7 @@ function Navbar() {
           href="#About"
           className="block mt-4 lg:inline-block lg:mt-0 text-gray-500 hover:text-black mr-9"
         >
-          About
+          Our Motive
         </a>
         <a
           href="#services"

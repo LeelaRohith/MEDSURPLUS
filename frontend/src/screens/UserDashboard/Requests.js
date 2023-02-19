@@ -15,6 +15,7 @@ import { Axios } from '../../utils/Axios'
 import PendingIcon from '@mui/icons-material/Pending'
 import HourglassTopIcon from '@mui/icons-material/HourglassTop'
 import { useSnackbar } from 'notistack'
+import DoneIcon from '@mui/icons-material/Done'
 
 function Requests() {
   const { enqueueSnackbar } = useSnackbar()
@@ -97,7 +98,12 @@ function Requests() {
             onClick={() => {
               setmodal(true)
             }}
-            style={{ backgroundColor: '#00e8ff' }}
+            style={{
+              backgroundColor: 'white',
+              color: 'black',
+              boxShadow:
+                'rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset',
+            }}
           >
             Sell Tablets
           </Button>
@@ -349,31 +355,52 @@ function Requests() {
                             </div>
                           ) : (
                             <div>
-                              <div>
-                                <p className="mt-2 ">Pharmacy details : </p>
-                                <p className="mt-2 ">
-                                  Pharmacy Name :{item.pharmacyId.name}
-                                </p>
-                                <p className="mt-2 ">
-                                  Address :{item.pharmacyId.address}
-                                </p>
-                                <p className="mt-2 ">
-                                  Contact no :{item.pharmacyId.contactNo}
-                                </p>
-                              </div>
-                              <br></br>
-                              <div
-                                style={{
-                                  display: 'flex',
-                                  alignItems: 'center',
-                                  flexDirection: 'column',
-                                }}
-                              >
-                                <div className="text-slate-500 pb-2">
-                                  Waiting for delivery
+                              {item.status === 'accepted' ? (
+                                <div>
+                                  <div>
+                                    <p className="mt-2 ">Pharmacy details : </p>
+                                    <p className="mt-2 ">
+                                      Pharmacy Name :{item.pharmacyId.name}
+                                    </p>
+                                    <p className="mt-2 ">
+                                      Address :{item.pharmacyId.address}
+                                    </p>
+                                    <p className="mt-2 ">
+                                      Contact no :{item.pharmacyId.contactNo}
+                                    </p>
+                                  </div>
+                                  <br></br>
+                                  <div
+                                    style={{
+                                      display: 'flex',
+                                      alignItems: 'center',
+                                      flexDirection: 'column',
+                                    }}
+                                  >
+                                    <div className="text-slate-500 pb-2">
+                                      Waiting for delivery
+                                    </div>
+                                    <div
+                                      //className="shadow-lg shadow-indigo-500/40 ..."
+                                      style={{
+                                        width: 'fit-content',
+                                        backgroundColor: 'orange',
+                                        height: '35px',
+                                        textAlign: 'center',
+                                        color: 'white',
+                                        padding: '5px 16px',
+                                        borderRadius: '50px',
+                                        marginBottom: '10px',
+                                      }}
+                                    >
+                                      <span>
+                                        <HourglassTopIcon /> Request Accepted
+                                      </span>
+                                    </div>
+                                  </div>
                                 </div>
+                              ) : (
                                 <div
-                                  //className="shadow-lg shadow-indigo-500/40 ..."
                                   style={{
                                     width: 'fit-content',
                                     backgroundColor: 'green',
@@ -382,14 +409,14 @@ function Requests() {
                                     color: 'white',
                                     padding: '5px 16px',
                                     borderRadius: '50px',
-                                    marginBottom: '10px',
+                                    margin: '10px auto',
+                                    display: 'flex',
+                                    justifyContent: 'center',
                                   }}
                                 >
-                                  <span>
-                                    <HourglassTopIcon /> Request Accepted
-                                  </span>
+                                  <DoneIcon /> delivered
                                 </div>
-                              </div>
+                              )}
                             </div>
                           )}
                         </div>

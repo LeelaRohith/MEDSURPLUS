@@ -9,6 +9,7 @@ body {
   font-family: Poppins;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 * {
   box-sizing: border-box;
@@ -19,7 +20,8 @@ code {
 }
 
 :root {
-  --themecolor: #645cbb;
+  --backgroundColor: #645cbb;
+  --themecolor: #3b8183;
   --lightBlue: #7286d3;
   --cardColor: #fefbf6;
   --textcolorHome: rgb(255, 255, 255);

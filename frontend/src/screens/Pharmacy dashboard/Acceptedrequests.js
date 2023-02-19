@@ -33,6 +33,7 @@ function AcceptedRequests() {
   }, [])
   const handleDeliver = async (orderId) => {
     try {
+      console.log(orderId)
       setloadDeliver(true)
       const res = await Axios.patch('/pharmacy/delivered', { orderId })
       setloadDeliver(false)

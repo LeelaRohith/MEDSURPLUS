@@ -74,7 +74,7 @@ function Rewards() {
               flexDirection: 'row',
               justifyContent: 'flex-start',
               flexWrap: 'wrap',
-              minHeight: '88vh',
+              // minHeight: '88vh',
             }}
           >
             {rewards &&
@@ -83,31 +83,55 @@ function Rewards() {
                   <div
                     style={{
                       backgroundColor: 'white',
-                      height: '300px',
-                      width: '280px',
+                      //  height: 'fit-content',
+                      width: '16rem',
+                      height: '16.8rem',
                       margin: '34px',
                       borderRadius: '20px',
                       display: 'flex',
                       flexDirection: 'column',
                       justifyContent: 'flex-start',
+                      //   padding: '8px',
+                      boxShadow: 'rgba(0, 0, 0, 0.1) 0px 4px 12px',
+                      border: '1px solid blue',
                     }}
                   >
                     <div>
                       <img
                         src={`data:image/png;base64,${item.image}`}
-                        width="250px"
-                        height="80px"
                         style={{
-                          marginLeft: '20px',
-                          paddingTop: '5px',
+                          objectFit: 'contain',
+                          height: '7rem',
+                          width: '100%',
+                          borderRadius: '20px 20px 0 0',
                         }}
                         alt=""
                       ></img>
                     </div>
-                    <div style={{ textAlign: 'center', marginTop: '10px' }}>
-                      {item.reward}
-                      <br></br> Code : {item.orderId} <br></br> Medical Shop :{' '}
-                      {item.organisation}
+                    <hr />
+                    <div
+                      style={{
+                        textAlign: 'center',
+                        marginTop: '10px',
+                        padding: '10px',
+                      }}
+                    >
+                      <div>{item.reward} </div>
+                      <div
+                        style={{
+                          padding: '9px',
+                          backgroundColor: 'var(--cardColor)',
+                          border: '1px solid black',
+                          borderRadius: '2px',
+                          fontSize: '14px',
+                          marginTop: '8px',
+                        }}
+                      >
+                        {item._id}
+                      </div>{' '}
+                      <div style={{ paddingTop: '4px' }}>
+                        organisation : {item.organisation}
+                      </div>
                     </div>
                   </div>
                 )

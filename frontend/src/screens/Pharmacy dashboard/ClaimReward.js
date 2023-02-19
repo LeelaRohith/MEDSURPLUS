@@ -153,7 +153,7 @@ function ClaimReward() {
                 Reward Earned : {foundReward.reward}
               </p>
               <p style={{ marginBottom: '5px', whiteSpace: 'nowrap' }}>
-                Coupon code :{foundReward._id}
+                Coupon code : {foundReward._id}
               </p>
               <Button
                 className="w-20"

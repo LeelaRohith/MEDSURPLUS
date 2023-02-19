@@ -72,7 +72,7 @@ function Maps() {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                backgroundImage: 'var(--homethemecolor)',
+                backgroundColor: 'var(--themecolor)',
               }}
             >
               <Map
@@ -84,14 +84,13 @@ function Maps() {
                 }}
                 style={{
                   width: '80vw',
-                  height: '100vh',
-                  marginTop: '2.3rem',
+                  height: '87.5vh',
+                  margin: '1rem 0',
                 }}
                 mapStyle="mapbox://styles/mapbox/streets-v12"
               >
                 {pharmacyCoordinates &&
                   pharmacyCoordinates.map((coords, idx) => {
-                    console.log(coords.lattitude)
                     return (
                       <Marker
                         key={idx}

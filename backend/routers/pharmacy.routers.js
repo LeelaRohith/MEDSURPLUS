@@ -6,10 +6,6 @@ import { Pharmacy } from '../models/pharmacy.schema.js'
 import fs from 'fs'
 import path from 'path'
 
-const __dirname = path.dirname(new URL(import.meta.url).pathname)
-
-const filePath = path.join(__dirname, '..', 'uploads', 'discount1.jpg')
-
 const router = express.Router()
 
 router.patch('/pharmacy/accept', authorizeUser, async (req, res) => {
@@ -60,7 +56,7 @@ router.patch('/pharmacy/delivered', authorizeUser, async (req, res) => {
       image,
       userId: order.userId._id,
     }).save()
-
+    // console.log(newReward)
     res.status(200).send({
       message: 'user successfully delivered and reward is on its way',
     })
