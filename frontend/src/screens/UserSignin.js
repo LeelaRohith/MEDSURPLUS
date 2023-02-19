@@ -68,7 +68,7 @@ function UserSignin() {
               boxshadow: '0 0 15px #000',
               marginTop: '5.5%',
               boxShadow: 'rgba(0, 0, 0, 0.15) 0px 3px 3px 0px',
-              width: '20%',
+              width: '350px',
             }}
           >
             <div className="signin" style={{}}>
