@@ -87,7 +87,7 @@ function Maps() {
                   height: '87.5vh',
                   margin: '1rem 0',
                 }}
-                mapStyle="mapbox://styles/mapbox/streets-v12"
+                mapStyle="mapbox://styles/mapbox/streets-v9"
               >
                 {pharmacyCoordinates &&
                   pharmacyCoordinates.map((coords, idx) => {
