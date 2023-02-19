@@ -50,7 +50,6 @@ router.patch('/pharmacy/delivered', authorizeUser, async (req, res) => {
       organisation = order.pharmacyId.name
 
       image = fs.readFileSync('uploads/discount1.jpg', 'base64')
-      console.log(image)
     }
 
     const newReward = await new Reward({
@@ -61,7 +60,6 @@ router.patch('/pharmacy/delivered', authorizeUser, async (req, res) => {
       image,
       userId: order.userId._id,
     }).save()
-    console.log(4)
 
     res.status(200).send({
       message: 'user successfully delivered and reward is on its way',
