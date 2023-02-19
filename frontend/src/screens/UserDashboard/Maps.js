@@ -5,11 +5,13 @@ import Map, { Marker } from 'react-map-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import UserNavbar from './Navbar'
 import { Axios } from '../../utils/Axios'
+import { useSnackbar } from 'notistack'
 
 function Maps() {
   const [userCoordinates, setuserCoordinates] = useState()
   const [pharmacyCoordinates, setpharmacyCoordinates] = useState()
   const [loading, setloading] = useState(false)
+  const { enqueueSnackbar } = useSnackbar()
   useEffect(() => {
     setloading(true)
     navigator.geolocation.getCurrentPosition(function (position) {
@@ -19,8 +21,13 @@ function Maps() {
       })
     })
     async function getCoords() {
-      const res = await Axios.get('/pharmaciesCoordinates')
-      setpharmacyCoordinates(res.data)
+      try {
+        const res = await Axios.get('/pharmaciesCoordinates')
+        setpharmacyCoordinates(res.data)
+      } catch (err) {
+        console.log(err.response.data.message)
+        enqueueSnackbar(err.response.data.message, { variant: 'error' })
+      }
     }
     getCoords()
     setloading(false)

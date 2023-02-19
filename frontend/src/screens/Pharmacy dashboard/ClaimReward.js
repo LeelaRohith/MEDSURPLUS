@@ -3,15 +3,11 @@ import UserNavbar from './Navbar'
 import Divider from '@mui/material/Divider'
 import { Axios } from '../../utils/Axios'
 import { useEffect, useState } from 'react'
+import { useSnackbar } from 'notistack'
 
 function ClaimReward() {
-  const details = [
-    {
-      name: 'rohith',
-      reward: '50%off on his next purchase',
-      couponid: '675675967',
-    },
-  ]
+  const { enqueueSnackbar } = useSnackbar()
+
   const [code, setcode] = useState()
   const [foundReward, setfoundReward] = useState()
   const [loadSearch, setloadSearch] = useState(false)
@@ -22,9 +18,14 @@ function ClaimReward() {
       setloadClaim(true)
       const res = await Axios.post('/claimReward', { code })
       console.log(res.data)
+      enqueueSnackbar(res.data.message, {
+        variant: 'success',
+        autoHideDuration: 1000,
+      })
       setloadClaim(false)
     } catch (err) {
       console.log(err.response.data.message)
+      enqueueSnackbar(err.response.data.message, { variant: 'error' })
       setloadClaim(false)
     }
   }
@@ -37,6 +38,8 @@ function ClaimReward() {
       setloadSearch(false)
     } catch (err) {
       console.log(err.response.data.message)
+      enqueueSnackbar(err.response.data.message, { variant: 'error' })
+
       setloadSearch(false)
     }
   }
@@ -62,6 +65,7 @@ function ClaimReward() {
             style={{
               borderRadius: '4px',
               marginRight: '10px',
+              width: '30%',
             }}
             onChange={(e) => setcode(e.target.value)}
             type="text"
@@ -128,19 +132,27 @@ function ClaimReward() {
                 backgroundColor: 'white',
                 display: 'flex',
                 flexDirection: 'column',
-                // textAlign: "left",
+                textAlign: 'left',
                 justifyContent: 'center',
                 alignItems: 'center',
                 borderRadius: '10px',
+                padding: '18px',
+                width: '30%',
               }}
             >
-              <p style={{ marginBottom: '5px', paddingTop: '10px' }}>
+              <p
+                style={{
+                  marginBottom: '5px',
+                  paddingTop: '10px',
+                  whiteSpace: 'nowrap',
+                }}
+              >
                 Customer name : {foundReward.userId.username}
               </p>
-              <p style={{ marginBottom: '5px' }}>
+              <p style={{ marginBottom: '5px', whiteSpace: 'nowrap' }}>
                 Reward Earned : {foundReward.reward}
               </p>
-              <p style={{ marginBottom: '5px' }}>
+              <p style={{ marginBottom: '5px', whiteSpace: 'nowrap' }}>
                 Coupon code :{foundReward._id}
               </p>
               <Button
@@ -148,6 +160,7 @@ function ClaimReward() {
                 style={{
                   backgroundColor: 'var(--lightBlue)',
                   height: '30px',
+                  marginTop: '18px',
                 }}
                 onClick={(e) => {
                   e.preventDefault()

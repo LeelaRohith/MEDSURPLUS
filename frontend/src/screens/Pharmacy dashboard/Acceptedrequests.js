@@ -2,9 +2,11 @@ import { Button } from 'flowbite-react'
 import React, { useEffect, useState } from 'react'
 import UserNavbar from './Navbar'
 import { Axios } from '../../utils/Axios'
+import { useSnackbar } from 'notistack'
 
 function AcceptedRequests() {
   const [acceptedRequests, setacceptedRequests] = useState()
+  const { enqueueSnackbar } = useSnackbar()
   const [loading, setloading] = useState(false)
   const [loadDeliver, setloadDeliver] = useState(false)
   async function getacceptedRequests() {
@@ -13,12 +15,19 @@ function AcceptedRequests() {
       const res = await Axios.get('/acceptedRequests')
       setacceptedRequests(res.data)
       console.log(res.data)
+      // enqueueSnackbar(res.data, {
+      //   variant: 'success',
+      //   autoHideDuration: 1000,
+      // })
       setloading(false)
     } catch (err) {
       console.log(err.response.data.message)
+      enqueueSnackbar(err.response.data.message, { variant: 'error' })
+
       setloading(false)
     }
   }
+
   useEffect(() => {
     getacceptedRequests()
   }, [])
@@ -26,6 +35,7 @@ function AcceptedRequests() {
     try {
       setloadDeliver(true)
       const res = await Axios.patch('/pharmacy/delivered', { orderId })
+      setloadDeliver(false)
       console.log(res)
     } catch (err) {
       console.log(err.response.data.message)
@@ -34,6 +44,7 @@ function AcceptedRequests() {
       getacceptedRequests()
     }
   }
+
   return (
     <div
       className=" pb-4  xl:pb-8"
@@ -85,6 +96,7 @@ function AcceptedRequests() {
             acceptedRequests.map((item, index) => {
               return (
                 <div
+                  key={index}
                   className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl"
                   style={{ margin: '20px' }}
                 >
@@ -97,9 +109,7 @@ function AcceptedRequests() {
                       />
                     </div>
                     <div className="p-8">
-                      <p className="mt-2 text-slate-500">
-                        Name :{item.userId.username}
-                      </p>
+                      <p className="mt-2 text-slate-500">Name :{item.name}</p>
                       <p className="mt-2 text-slate-500">
                         Order id :{item._id}
                       </p>

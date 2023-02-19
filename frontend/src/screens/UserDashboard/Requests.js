@@ -14,8 +14,10 @@ import { Axios } from '../../utils/Axios'
 
 import PendingIcon from '@mui/icons-material/Pending'
 import HourglassTopIcon from '@mui/icons-material/HourglassTop'
+import { useSnackbar } from 'notistack'
 
 function Requests() {
+  const { enqueueSnackbar } = useSnackbar()
   const [sellingDetails, setsellingDetails] = useState({
     name: '',
     file: null,
@@ -35,6 +37,8 @@ function Requests() {
       setrequestsLoading(false)
     } catch (err) {
       console.log(err.response.data.message)
+      enqueueSnackbar(err.response.data.message, { variant: 'error' })
+
       setrequestsLoading(false)
     }
   }
@@ -51,11 +55,17 @@ function Requests() {
       })
       setloading(false)
       if (res) {
-        console.log(res.data.message)
+        console.log(res.data)
+        console.log(res)
+        enqueueSnackbar(res.data.message, {
+          variant: 'success',
+          autoHideDuration: 1000,
+        })
       }
     } catch (err) {
       console.log(err.response.data.message)
       setloading(false)
+      enqueueSnackbar(err.response.data.message, { variant: 'error' })
     }
     setsellingDetails({
       name: '',
@@ -70,10 +80,11 @@ function Requests() {
   useEffect(() => {
     getRequests()
   }, [])
+
   return (
     <div
       className=" pb-4  xl:pb-8"
-      style={{ backgroundColor: 'var(--themecolor)', minHeight: '98vh' }}
+      style={{ backgroundColor: 'var(--themecolor)', minHeight: '100vh' }}
     >
       <UserNavbar></UserNavbar>
       <br></br>
@@ -86,7 +97,7 @@ function Requests() {
             onClick={() => {
               setmodal(true)
             }}
-            style={{ backgroundColor: 'var(--lightBlue)' }}
+            style={{ backgroundColor: '#00e8ff' }}
           >
             Sell Tablets
           </Button>

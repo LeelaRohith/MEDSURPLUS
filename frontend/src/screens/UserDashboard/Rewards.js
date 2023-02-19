@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
 import UserNavbar from './Navbar'
 import { Axios } from '../../utils/Axios'
+import { useSnackbar } from 'notistack'
 function Rewards() {
+  const { enqueueSnackbar } = useSnackbar()
   const [rewards, setrewards] = useState()
   const [loading, setloading] = useState(false)
   useEffect(() => {
@@ -14,6 +16,7 @@ function Rewards() {
       } catch (err) {
         console.log(err.response.data.message)
         setloading(false)
+        enqueueSnackbar(err.response.data.message, { variant: 'error' })
       }
     }
     getRewards()

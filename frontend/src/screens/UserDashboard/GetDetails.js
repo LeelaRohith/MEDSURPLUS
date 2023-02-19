@@ -3,10 +3,12 @@ import UserNavbar from './Navbar'
 import Divider from '@mui/material/Divider'
 import { Axios } from '../../utils/Axios'
 import { useEffect, useState } from 'react'
+import { useSnackbar } from 'notistack'
 
 function GetDetails() {
   const [medicineName, setmedicineName] = useState()
   const [response, setresponse] = useState()
+  const { enqueueSnackbar } = useSnackbar()
   const [loading, setloading] = useState(false)
   const getUsage = async () => {
     try {
@@ -17,6 +19,7 @@ function GetDetails() {
       setloading(false)
     } catch (err) {
       console.log(err.response.data.message)
+      enqueueSnackbar(err.response.data.message, { variant: 'error' })
       setloading(false)
     }
   }
@@ -53,7 +56,7 @@ function GetDetails() {
                 e.preventDefault()
                 getUsage()
               }}
-              style={{ backgroundColor: 'var(--lightBlue)' }}
+              style={{ backgroundColor: '#00e8ff' }}
             >
               Get Details
             </Button>
@@ -81,6 +84,11 @@ function GetDetails() {
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
+              fontWeight: 'bold',
+              fontSize: '40px',
+              color: 'white',
+              paddingRight: '10px',
+              paddingLeft: '10px',
             }}
           >
             <svg
@@ -102,36 +110,19 @@ function GetDetails() {
             <span className="sr-only">Loading...</span>
           </div>
         ) : (
-          <div>
-            {!response ? (
-              <div
-                style={{
-                  fontWeight: 'bold',
-                  fontSize: '40px',
-                  color: 'white',
-                  paddingRight: '10px',
-                  paddingLeft: '10px',
-                }}
-              >
-                Did you forget the tablet usage ? Dont Worry !
-              </div>
-            ) : (
-              <div
-                style={{
-                  backgroundColor: 'white',
-                  height: '',
-                  width: '50%',
-                  padding: '50px',
-                  borderRadius: '20px',
-                  textAlign: 'left',
-                  fontSize: '20px',
-                  boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px',
-                  margin: '0 auto',
-                }}
-              >
-                {response}
-              </div>
-            )}
+          <div
+            style={{
+              backgroundColor: 'white',
+              height: '',
+              width: '50%',
+              padding: '50px',
+              borderRadius: '20px',
+              textAlign: 'left',
+              fontSize: '20px',
+              boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px',
+            }}
+          >
+            {response}
           </div>
         )}
       </div>
