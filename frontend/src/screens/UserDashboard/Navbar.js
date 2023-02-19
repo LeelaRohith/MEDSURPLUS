@@ -1,8 +1,23 @@
-import { Dropdown, Navbar, Avatar } from "flowbite-react";
-import { useNavigate } from "react-router-dom";
+import { Dropdown, Navbar, Avatar } from 'flowbite-react'
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { Axios } from '../../utils/Axios'
 
 function UserNavbar() {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
+  const [userDetails, setuserDetails] = useState()
+  useEffect(() => {
+    async function getDetails() {
+      const res = await Axios.get('/userDetails')
+      console.log(res.data)
+      setuserDetails(res.data)
+    }
+    getDetails()
+  }, [])
+  const signout = () => {
+    localStorage.removeItem('jwtKey')
+    navigate('/')
+  }
   return (
     <Navbar fluid={true} rounded={true}>
       <Navbar.Brand href="https://flowbite.com/">
@@ -22,50 +37,63 @@ function UserNavbar() {
           label={
             <Avatar
               alt="User settings"
-              img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+              img="/static/images/userAvatar.png"
               rounded={true}
             />
           }
         >
-          <Dropdown.Header>
-            <span className="block text-sm">Bonnie Green</span>
-            <span className="block truncate text-sm font-medium">
-              name@flowbite.com
-            </span>
-          </Dropdown.Header>
+          {userDetails ? (
+            <Dropdown.Header>
+              <span className="block text-sm">{userDetails.username}</span>
+              <span className="block truncate text-sm font-medium">
+                {userDetails.email}
+              </span>
+            </Dropdown.Header>
+          ) : (
+            ''
+          )}
           <Dropdown.Divider />
-          <Dropdown.Item>Sign out</Dropdown.Item>
+          <Dropdown.Item>
+            <button
+              onClick={(e) => {
+                e.preventDefault()
+                signout()
+              }}
+            >
+              Sign out
+            </button>
+          </Dropdown.Item>
         </Dropdown>
         <Navbar.Toggle />
       </div>
       <Navbar.Collapse>
         <Navbar.Link
           className="cursor-pointer"
-          onClick={() => navigate("/user/Requests")}
+          onClick={() => navigate('/user/Requests')}
         >
           Requests
         </Navbar.Link>
         <Navbar.Link
-          onClick={() => navigate("/user/Getdetails")}
+          onClick={() => navigate('/user/Getdetails')}
           className="cursor-pointer"
         >
           Get Details
         </Navbar.Link>
         <Navbar.Link
-          onClick={() => navigate("/user/Nearbypharmacies")}
+          onClick={() => navigate('/user/Nearbypharmacies')}
           className="cursor-pointer"
         >
           Nearby Pharmacies
         </Navbar.Link>
         <Navbar.Link
-          onClick={() => navigate("/user/Rewards")}
+          onClick={() => navigate('/user/Rewards')}
           className="cursor-pointer"
         >
           Rewards
         </Navbar.Link>
       </Navbar.Collapse>
     </Navbar>
-  );
+  )
 }
 
-export default UserNavbar;
+export default UserNavbar

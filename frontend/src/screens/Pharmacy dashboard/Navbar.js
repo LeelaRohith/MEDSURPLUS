@@ -1,8 +1,23 @@
 import { Dropdown, Navbar, Avatar } from 'flowbite-react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { Axios } from '../../utils/Axios'
 
 function UserNavbar() {
   const navigate = useNavigate()
+  const [pharmacyDetails, setpharmacyDetails] = useState()
+  useEffect(() => {
+    async function getDetails() {
+      const res = await Axios.get('/pharmacyDetails')
+      console.log(res.data)
+      setpharmacyDetails(res.data)
+    }
+    getDetails()
+  }, [])
+  const signout = () => {
+    localStorage.removeItem('jwtKey')
+    navigate('/')
+  }
   return (
     <Navbar fluid={true} rounded={true}>
       <Navbar.Brand href="https://flowbite.com/">
@@ -21,20 +36,33 @@ function UserNavbar() {
           inline={true}
           label={
             <Avatar
-              alt="User settings"
-              img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+              alt="user settings"
+              img="/static/images/pharmacyAvatar.png"
               rounded={true}
             />
           }
         >
-          <Dropdown.Header>
-            <span className="block text-sm">Bonnie Green</span>
-            <span className="block truncate text-sm font-medium">
-              name@flowbite.com
-            </span>
-          </Dropdown.Header>
+          {pharmacyDetails ? (
+            <Dropdown.Header>
+              <span className="block text-sm">{pharmacyDetails.name}</span>
+              <span className="block truncate text-sm font-medium">
+                {pharmacyDetails.email}
+              </span>
+            </Dropdown.Header>
+          ) : (
+            ''
+          )}
           <Dropdown.Divider />
-          <Dropdown.Item>Sign out</Dropdown.Item>
+          <Dropdown.Item>
+            <button
+              onClick={(e) => {
+                e.preventDefault()
+                signout()
+              }}
+            >
+              Sign out
+            </button>
+          </Dropdown.Item>
         </Dropdown>
         <Navbar.Toggle />
       </div>

@@ -6,7 +6,7 @@ import { upload } from '../middlewares/multer.js'
 import { ChatGPTAPI } from 'chatgpt'
 
 const api = new ChatGPTAPI({
-  apiKey: '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',
+  apiKey: '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',
 })
 
 const router = express.Router()

@@ -19,6 +19,9 @@ router.post('/searchReward', authorizeUser, async (req, res) => {
     if (!code) {
       return res.status(402).send({ message: 'code required' })
     }
+    if (code.length !== 24) {
+      return res.status(403).send({ message: 'coupon not found' })
+    }
     const found = await Reward.findOne({ _id: req.body.code }).populate(
       'userId'
     )
