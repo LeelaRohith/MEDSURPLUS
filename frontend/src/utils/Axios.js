@@ -7,7 +7,6 @@ const instance = axios.create({
 
 instance.interceptors.request.use((req) => {
   req.headers.authorization = 'Bearer ' + (localStorage.getItem('jwtKey') || '')
-  console.log(req)
   return req
 })
 

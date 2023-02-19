@@ -9,7 +9,7 @@ function UserNavbar() {
   useEffect(() => {
     async function getDetails() {
       const res = await Axios.get('/userDetails')
-      console.log(res.data)
+
       setuserDetails(res.data)
     }
     getDetails()

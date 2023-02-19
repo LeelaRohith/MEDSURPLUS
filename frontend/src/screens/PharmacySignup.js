@@ -1,91 +1,90 @@
-import React, { useState } from "react";
-import LocationSearchingIcon from "@mui/icons-material/LocationSearching";
-import { Axios } from "../utils/Axios";
-import { useNavigate } from "react-router-dom";
-import { useSnackbar } from "notistack";
+import React, { useState } from 'react'
+import LocationSearchingIcon from '@mui/icons-material/LocationSearching'
+import { Axios } from '../utils/Axios'
+import { useNavigate } from 'react-router-dom'
+import { useSnackbar } from 'notistack'
 function PharmacySignup() {
-  const { enqueueSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar()
   const [pharmacyDetails, setpharmacyDetails] = useState({
-    name: "",
-    email: "",
-    password: "",
-    contactNo: "",
-    address: "",
-    city: "",
-    state: "",
+    name: '',
+    email: '',
+    password: '',
+    contactNo: '',
+    address: '',
+    city: '',
+    state: '',
     lattitude: 0,
     longitude: 0,
-  });
+  })
   const fetchCoordinates = () => {
     navigator.geolocation.getCurrentPosition(function (position) {
       setpharmacyDetails((prev) => ({
         ...prev,
         lattitude: position.coords.latitude,
-      }));
+      }))
       setpharmacyDetails((prev) => ({
         ...prev,
         longitude: position.coords.longitude,
-      }));
-    });
-  };
-  const navigate = useNavigate();
+      }))
+    })
+  }
+  const navigate = useNavigate()
   const handleSubmit = async () => {
     try {
-      const res = await Axios.post("/pharmacySignup", pharmacyDetails);
+      const res = await Axios.post('/pharmacySignup', pharmacyDetails)
       if (res) {
-        console.log(res.data.message);
         enqueueSnackbar(res.data.message, {
-          variant: "success",
+          variant: 'success',
           autoHideDuration: 1000,
-        });
-        navigate("/pharmacySignin");
+        })
+        navigate('/pharmacySignin')
       }
     } catch (err) {
-      console.log(err.response.data.message);
-      enqueueSnackbar(err.response.data.message, { variant: "error" });
+      console.log(err.response.data.message)
+      enqueueSnackbar(err.response.data.message, { variant: 'error' })
     }
-  };
+  }
 
   return (
     <div
       style={{
         backgroundImage:
-          "linear-gradient(to right, #66d3e6, #61ccea, #63c5ed, #6abdee, #75b4ed, #71b8f1, #6dbbf4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1)",
-        height: "130%",
+          'linear-gradient(to right, #66d3e6, #61ccea, #63c5ed, #6abdee, #75b4ed, #71b8f1, #6dbbf4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1)',
+        height: '130%',
       }}
     >
       <br></br>
       <span
         className="font-semibold text-xl tracking-tight"
         style={{
-          color: "black",
-          paddingLeft: "40px",
-          paddingTop: "20px",
-          fontSize: "170%",
+          color: 'black',
+          paddingLeft: '40px',
+          paddingTop: '20px',
+          fontSize: '170%',
         }}
       >
         MEDSURPLUS
       </span>
       <div
         className="grid gap-6 mb-6 md:grid-cols-2"
-        style={{ padding: "5%", paddingTop: "2%", marginBottom: "0%" }}
+        style={{ padding: '5%', paddingTop: '2%', marginBottom: '0%' }}
       >
         <div>
           <img
             src="static/images/Pillimage.png"
             alt="pill"
             style={{
-              paddingTop: "20%",
-              marginLeft: "auto",
-              marginRight: "auto",
-              width: "50%",
+              paddingTop: '20%',
+              marginLeft: 'auto',
+              marginRight: 'auto',
+              width: '50%',
             }}
           />
           <p
             style={{
-              textAlign: "center",
-              color: "whitesmoke",
-              fontSize: "3rem",
+              textAlign: 'center',
+              color: 'whitesmoke',
+              fontSize: '3rem',
             }}
           >
             WELCOME !!
@@ -93,23 +92,23 @@ function PharmacySignup() {
         </div>
         <div
           style={{
-            display: "flex",
-            justifyContent: "center",
+            display: 'flex',
+            justifyContent: 'center',
           }}
         >
           {
             <fieldset
               style={{
-                backgroundColor: "#eeeeee",
-                padding: "3em",
-                paddingTop: "3%",
+                backgroundColor: '#eeeeee',
+                padding: '3em',
+                paddingTop: '3%',
                 // border: '3px solid #347aeb',
-                borderRadius: "10px",
-                boxShadow: "rgba(0, 0, 0, 0.15) 0px 5px 15px 0px",
+                borderRadius: '10px',
+                boxShadow: 'rgba(0, 0, 0, 0.15) 0px 5px 15px 0px',
               }}
             >
               <div className="signup">
-                <p style={{ textAlign: "center", fontSize: "180%" }}>Signup</p>
+                <p style={{ textAlign: 'center', fontSize: '180%' }}>Signup</p>
                 <br></br>
                 <form>
                   <div className="mb-6">
@@ -197,35 +196,35 @@ function PharmacySignup() {
                   <div
                     className="mb-6"
                     style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      flexDirection: "column",
+                      display: 'flex',
+                      justifyContent: 'center',
+                      flexDirection: 'column',
                     }}
                   >
                     {pharmacyDetails.lattitude !== 0 ? (
                       <div
                         style={{
-                          color: "green",
-                          marginBottom: "8px",
+                          color: 'green',
+                          marginBottom: '8px',
                         }}
                       >
                         Successfully fetched the Coordinates
                       </div>
                     ) : (
-                      ""
+                      ''
                     )}
                     <button
                       style={{
-                        backgroundColor: "green",
-                        color: "white",
-                        padding: "5px 15px",
-                        boxShadow: "rgba(0, 0, 0, 0.15) 0px 3px 3px 0px",
-                        borderRadius: "5px",
+                        backgroundColor: 'green',
+                        color: 'white',
+                        padding: '5px 15px',
+                        boxShadow: 'rgba(0, 0, 0, 0.15) 0px 3px 3px 0px',
+                        borderRadius: '5px',
                       }}
                       type="button"
                       onClick={(e) => {
-                        e.preventDefault();
-                        fetchCoordinates();
+                        e.preventDefault()
+                        fetchCoordinates()
                       }}
                     >
                       <LocationSearchingIcon /> Fetch Geo Coordinates
@@ -311,7 +310,7 @@ function PharmacySignup() {
                       htmlFor="remember"
                       className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                     >
-                      I agree with the{" "}
+                      I agree with the{' '}
                       <a
                         href="#"
                         className="text-blue-600 hover:underline dark:text-blue-500"
@@ -321,14 +320,14 @@ function PharmacySignup() {
                       .
                     </label>
                   </div>
-                  <div style={{ display: "flex", justifyContent: "center" }}>
+                  <div style={{ display: 'flex', justifyContent: 'center' }}>
                     <button
                       type="submit"
                       onClick={(e) => {
-                        e.preventDefault();
-                        handleSubmit();
+                        e.preventDefault()
+                        handleSubmit()
                       }}
-                      style={{ width: "100%" }}
+                      style={{ width: '100%' }}
                       className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                     >
                       Submit
@@ -342,6 +341,6 @@ function PharmacySignup() {
         </div>
       </div>
     </div>
-  );
+  )
 }
-export default PharmacySignup;
+export default PharmacySignup

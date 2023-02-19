@@ -39,7 +39,6 @@ function UserSignup() {
       }
       const res = await Axios.post('/userSignup', formDetails)
       if (res) {
-        console.log(res.data.message)
         enqueueSnackbar(res.data.message, {
           variant: 'success',
           autoHideDuration: 1000,

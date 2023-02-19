@@ -38,7 +38,6 @@ function Maps() {
     setloading(false)
   }, [])
 
-  console.log(pharmacyCoordinates)
   return (
     <>
       <UserNavbar />

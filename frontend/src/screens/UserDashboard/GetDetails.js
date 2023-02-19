@@ -14,7 +14,7 @@ function GetDetails() {
     try {
       setloading(true)
       const res = await Axios.post('/chatgpt', { medicineName })
-      console.log(res)
+
       setresponse(res.data)
       setloading(false)
     } catch (err) {

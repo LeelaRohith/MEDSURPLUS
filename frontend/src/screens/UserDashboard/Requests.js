@@ -33,7 +33,7 @@ function Requests() {
     try {
       setrequestsLoading(true)
       const res = await Axios.get('/requests')
-      console.log(res)
+
       setrequests(res.data)
       setrequestsLoading(false)
     } catch (err) {
@@ -56,8 +56,6 @@ function Requests() {
       })
       setloading(false)
       if (res) {
-        console.log(res.data)
-        console.log(res)
         enqueueSnackbar(res.data.message, {
           variant: 'success',
           autoHideDuration: 1000,

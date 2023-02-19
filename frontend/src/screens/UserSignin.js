@@ -21,7 +21,6 @@ function UserSignin() {
           variant: 'success',
           autoHideDuration: 1000,
         })
-        console.log(res.data.message)
 
         navigate('/user/Requests')
       }

@@ -17,7 +17,7 @@ function ClaimReward() {
     try {
       setloadClaim(true)
       const res = await Axios.post('/claimReward', { code })
-      console.log(res.data)
+
       enqueueSnackbar(res.data.message, {
         variant: 'success',
         autoHideDuration: 1000,
@@ -33,7 +33,7 @@ function ClaimReward() {
     try {
       setloadSearch(true)
       const res = await Axios.post('/searchReward', { code })
-      console.log(res.data)
+
       setfoundReward(res.data)
       setloadSearch(false)
     } catch (err) {

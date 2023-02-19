@@ -18,7 +18,6 @@ function PharmacySignin() {
 
       if (res) {
         localStorage.setItem('jwtKey', res.data.jwtToken)
-        console.log(res.data.message)
         enqueueSnackbar(res.data.message, {
           variant: 'success',
           autoHideDuration: 1000,

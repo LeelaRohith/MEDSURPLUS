@@ -15,7 +15,6 @@ function PendingRequests() {
       const res = await Axios.get('/pendingRequests')
       setpendingRequests(res.data)
 
-      console.log('pend', res.data)
       setloading(false)
     } catch (err) {
       console.log(err.response.data.message)
@@ -31,7 +30,7 @@ function PendingRequests() {
     try {
       setacceptLoad(true)
       const res = await Axios.patch('/pharmacy/accept', { orderId })
-      console.log(res)
+
       setacceptLoad(false)
     } catch (err) {
       console.log(err.response.data.message)

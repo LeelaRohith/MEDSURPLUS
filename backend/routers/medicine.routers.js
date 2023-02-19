@@ -9,7 +9,7 @@ dotenv.config()
 
 let api
 try {
-  // console.log(process.env.OPENAI_API_KEY)
+  console.log(process.env.OPENAI_API_KEY)
   api = new ChatGPTAPI({
     apiKey: process.env.OPENAI_API_KEY,
   })
