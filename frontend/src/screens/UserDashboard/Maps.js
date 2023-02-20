@@ -18,12 +18,12 @@ function Maps() {
   const [loading, setloading] = useState(false)
   const { enqueueSnackbar } = useSnackbar()
   useEffect(() => {
-    setloading(true)
     navigator.geolocation.getCurrentPosition(function (position) {
       setuserCoordinates({
         lat: position.coords.latitude,
         long: position.coords.longitude,
       })
+      console.log(position.coords.latitude, position.coords.longitude)
     })
     async function getCoords() {
       try {
@@ -35,7 +35,6 @@ function Maps() {
       }
     }
     getCoords()
-    setloading(false)
   }, [])
 
   return (

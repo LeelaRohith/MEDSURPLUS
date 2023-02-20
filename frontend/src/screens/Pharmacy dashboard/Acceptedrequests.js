@@ -40,8 +40,8 @@ function AcceptedRequests() {
       console.log(err.response.data.message)
       setloading(false)
       setloadDeliver(false)
-      getacceptedRequests()
     }
+    getacceptedRequests()
   }
 
   return (
